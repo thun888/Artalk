@@ -54,6 +54,9 @@ db:
 http:
   # Body size limit (unit: MB)
   body_limit: 100
+  # Proxy Header (leave blank to disable if not behind a trusted reverse proxy for security)
+  proxy_header: X-Forwarded-For
+
 # Logging
 log:
   # Enable logging

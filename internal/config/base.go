@@ -129,6 +129,12 @@ func (conf *Config) normalPatch() {
 	if conf.HTTP.BodyLimit <= 0 {
 		conf.HTTP.BodyLimit = 100
 	}
+	if conf.HTTP.ProxyHeader == nil {
+		defaultProxyHeader := "X-Forwarded-For"
+		conf.HTTP.ProxyHeader = &defaultProxyHeader
+	} else {
+		*conf.HTTP.ProxyHeader = strings.TrimSpace(*conf.HTTP.ProxyHeader)
+	}
 }
 
 // 多语言配置修补

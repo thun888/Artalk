@@ -51,6 +51,9 @@ db:
 http:
   # 请求体大小限制 (单位：MB)
   body_limit: 100
+  # 代理标头名 (用于 CDN 准确获取用户 IP，若未使用可信的 CDN 则留空禁用以确保安全)
+  proxy_header: X-Forwarded-For
+
 # 日志
 log:
   # 启用日志
