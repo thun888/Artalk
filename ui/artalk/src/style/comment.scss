@@ -262,12 +262,12 @@
         flex-direction: row;
         align-items: center;
         flex-wrap: wrap;
-        margin-top: 6px;
+        margin-top: 5px;
 
         .atk-tag {
           @extend .badge;
           font-size: 12px;
-          padding: 6px;
+          padding: 0 6px;
           border-radius: 2px;
           color: var(--at-comment-tag-color-light);
           background: var(--at-comment-tag-bg-light);
