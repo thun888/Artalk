@@ -20,8 +20,8 @@
   --at-color-gradient: linear-gradient(180deg, transparent, rgba(255, 255, 255));
   --at-comment-tag-color-light: #757575;
   --at-comment-tag-color-dark: #939393;
-  --at-comment-tag-bg-light: #F4F4F4;
-  --at-comment-tag-bg-dark: #1E1E1E;
+  --at-comment-tag-bg-light: #f4f4f4;
+  --at-comment-tag-bg-dark: #1e1e1e;
 
   &.atk-dark-mode {
     --at-color-font: #fff;
@@ -44,7 +44,7 @@
     --at-color-gradient: linear-gradient(180deg, transparent, rgba(30, 34, 36, 1));
     --at-comment-tag-color-light: #939393;
     --at-comment-tag-color-dark: #757575;
-    --at-comment-tag-bg-light: #1E1E1E;
-    --at-comment-tag-bg-dark: #F4F4F4;
+    --at-comment-tag-bg-light: #1e1e1e;
+    --at-comment-tag-bg-dark: #f4f4f4;
   }
 }
