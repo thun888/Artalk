@@ -39,10 +39,14 @@ func (c *CapJSCaptchaChecker) Check(value string) (bool, error) {
 	url := c.APIEndpoint + "/" + c.KeyID + "/siteverify"
 	cli := http.Client{Timeout: time.Second * 10} // 10s 超时
 	resp, err := cli.PostForm(url, values)
-	if err != nil || resp.StatusCode != 200 {
+	if err != nil {
 		return false, err
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		return false, fmt.Errorf("api request failed with status code: %d", resp.StatusCode)
+	}
 
 	// 解析响应内容
 	respBuf, _ := io.ReadAll(resp.Body)
