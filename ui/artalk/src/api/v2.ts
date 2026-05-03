@@ -61,6 +61,8 @@ export interface EntityCookedComment {
   visible: boolean
   vote_down: number
   vote_up: number
+  admin_up: boolean
+  admin_badge_name?: string
 }
 
 export interface EntityCookedNotify {
@@ -594,6 +596,8 @@ export interface HandlerResponseVote {
   is_down: boolean
   is_up: boolean
   up: number
+  admin_up: boolean
+  admin_badge_name?: string
 }
 
 export type QueryParamsType = Record<string | number, any>

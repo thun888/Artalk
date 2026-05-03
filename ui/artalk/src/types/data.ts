@@ -67,6 +67,12 @@ export interface CommentData {
 
   /** 反对数 */
   vote_down: number
+
+  /** 管理员是否赞过 */
+  admin_up?: boolean
+
+  /** 点赞管理员的徽章名称 */
+  admin_badge_name?: string
 }
 
 export interface ListData {

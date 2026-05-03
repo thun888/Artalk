@@ -273,6 +273,23 @@ func (dao *Dao) IsAdminUserByNameEmail(name string, email string) bool {
 	return false
 }
 
+func (dao *Dao) GetAdminVoterForTarget(targetName string, targetID uint) entity.User {
+	adminIDs := dao.GetAllAdminIDs()
+	if len(adminIDs) == 0 {
+		return entity.User{}
+	}
+
+	var vote entity.Vote
+	dao.DB().Where("target_id = ? AND type = ? AND user_id IN ?",
+		targetID, targetName+"_up", adminIDs).First(&vote)
+
+	if vote.IsEmpty() {
+		return entity.User{}
+	}
+
+	return dao.FindUserByID(vote.UserID)
+}
+
 //#endregion
 
 func (dao *Dao) FindAuthIdentityByToken(provider string, token string) entity.AuthIdentity {

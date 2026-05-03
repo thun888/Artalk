@@ -1,3 +1,4 @@
+import renderTags from './renders/tags'
 import type { CommentNode } from '.'
 import ActionBtn from '@/components/action-btn'
 import $t from '@/i18n'
@@ -31,8 +32,11 @@ export default class CommentActions {
       .then((res) => {
         this.data.vote_up = res.data.up
         this.data.vote_down = res.data.down
+        this.data.admin_up = res.data.admin_up
+        this.data.admin_badge_name = res.data.admin_badge_name
         this.comment.getRender().voteBtnUp?.updateText()
         this.comment.getRender().voteBtnDown?.updateText()
+        renderTags(this.comment.getRender())
       })
       .catch((err) => {
         actionBtn?.setError($t('voteFail'))

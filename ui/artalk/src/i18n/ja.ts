@@ -40,6 +40,7 @@ export default defineLocaleExternal(
     voteUp: '賛成',
     voteDown: '反対',
     voteFail: '投票に失敗しました',
+    adminVoteUp: 'がいいと思いました',
     readMore: '続きを読む',
     actionConfirm: '操作を確認',
     collapse: '折り畳む',
