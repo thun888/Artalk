@@ -23,6 +23,8 @@ type CookedComment struct {
 	Visible        bool   `json:"visible"`
 	VoteUp         int    `json:"vote_up"`
 	VoteDown       int    `json:"vote_down"`
+	AdminUp        bool   `json:"admin_up"`
+	AdminBadgeName string `json:"admin_badge_name,omitempty"`
 	PageKey        string `json:"page_key"`
 	PageURL        string `json:"page_url"`
 	SiteName       string `json:"site_name"`

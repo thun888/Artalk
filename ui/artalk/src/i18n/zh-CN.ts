@@ -38,6 +38,7 @@ const zhCN: I18n = {
   voteUp: '赞同',
   voteDown: '反对',
   voteFail: '投票失败',
+  adminVoteUp: '觉得很赞',
   readMore: '阅读更多',
   actionConfirm: '确认操作',
   collapse: '折叠',

@@ -36,6 +36,7 @@ const en = {
   voteUp: 'Up',
   voteDown: 'Down',
   voteFail: 'Vote Failed',
+  adminVoteUp: ' thinks this is great',
   readMore: 'Read More',
   actionConfirm: 'Confirm',
   collapse: 'Collapse',

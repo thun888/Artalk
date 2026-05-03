@@ -16,10 +16,12 @@ import (
 )
 
 type ResponseVote struct {
-	Up     int  `json:"up"`
-	Down   int  `json:"down"`
-	IsUp   bool `json:"is_up"`
-	IsDown bool `json:"is_down"`
+	Up            int    `json:"up"`
+	Down          int    `json:"down"`
+	IsUp          bool   `json:"is_up"`
+	IsDown        bool   `json:"is_down"`
+	AdminUp       bool   `json:"admin_up"`
+	AdminBadgeName string `json:"admin_badge_name,omitempty"`
 }
 
 // @Id           GetVote
@@ -64,6 +66,12 @@ func VoteGet(app *core.App, router fiber.Router) {
 			choice := getVoteChoice(string(exitsVotes[0].Type))
 			result.IsUp = choice == "up"
 			result.IsDown = choice == "down"
+		}
+
+		adminUser := app.Dao().GetAdminVoterForTarget(targetName, uint(targetID))
+		if !adminUser.IsEmpty() {
+			result.AdminUp = true
+			result.AdminBadgeName = adminUser.BadgeName
 		}
 
 		return common.RespData(c, result)
@@ -154,6 +162,12 @@ func VoteCreate(app *core.App, router fiber.Router) {
 				return common.RespError(c, 404, i18n.T("{{name}} not found", Map{"name": target}))
 			}
 			return common.RespError(c, 500, "Failed to update vote")
+		}
+
+		adminUser := app.Dao().GetAdminVoterForTarget(targetName, uint(targetID))
+		if !adminUser.IsEmpty() {
+			result.AdminUp = true
+			result.AdminBadgeName = adminUser.BadgeName
 		}
 
 		return common.RespData(c, result)

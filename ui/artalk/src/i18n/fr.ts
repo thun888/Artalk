@@ -40,6 +40,7 @@ export default defineLocaleExternal(
     voteUp: 'Vote Pour',
     voteDown: 'Vote Contre',
     voteFail: 'Échec du vote',
+    adminVoteUp: ' trouve cela excellent',
     readMore: 'Lire la suite',
     actionConfirm: 'Confirmer',
     collapse: 'Réduire',

@@ -40,6 +40,7 @@ export default defineLocaleExternal(
     voteUp: '추천',
     voteDown: '비추천',
     voteFail: '투표 실패',
+    adminVoteUp: '님이 좋다고 생각합니다',
     readMore: '더 보기',
     actionConfirm: '확인',
     collapse: '접기',

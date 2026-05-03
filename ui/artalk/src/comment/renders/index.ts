@@ -6,6 +6,7 @@ import ReplyAt from './reply-at'
 import ReplyTo from './reply-to'
 import Pending from './pending'
 import Actions from './actions'
+import Tags from './tags'
 
 const Renders = {
   Avatar,
@@ -15,6 +16,7 @@ const Renders = {
   ReplyTo,
   Pending,
   Actions,
+  Tags,
 }
 
 export default function loadRenders(r: Render) {

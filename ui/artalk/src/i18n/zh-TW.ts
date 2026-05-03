@@ -38,6 +38,7 @@ export default defineLocaleExternal('zh-TW', {
   voteUp: '贊同',
   voteDown: '反對',
   voteFail: '投票失敗',
+  adminVoteUp: '覺得很讚',
   readMore: '閱讀更多',
   actionConfirm: '確認操作',
   collapse: '折疊',

@@ -43,6 +43,13 @@ func (dao *Dao) CookComment(c *entity.Comment) entity.CookedComment {
 
 	markedContent, _ := utils.Marked(c.Content)
 
+	adminUser := dao.GetAdminVoterForTarget("comment", c.ID)
+	adminUp := !adminUser.IsEmpty()
+	adminBadgeName := ""
+	if adminUp {
+		adminBadgeName = adminUser.BadgeName
+	}
+
 	return entity.CookedComment{
 		ID:             c.ID,
 		Content:        c.Content,
@@ -65,6 +72,8 @@ func (dao *Dao) CookComment(c *entity.Comment) entity.CookedComment {
 		Visible:        true,
 		VoteUp:         c.VoteUp,
 		VoteDown:       c.VoteDown,
+		AdminUp:        adminUp,
+		AdminBadgeName: adminBadgeName,
 		PageKey:        c.PageKey,
 		PageURL:        dao.GetPageAccessibleURL(page, site),
 		SiteName:       c.SiteName,
