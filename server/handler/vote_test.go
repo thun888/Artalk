@@ -28,7 +28,7 @@ func TestVote(t *testing.T) {
 			ip:           "127.0.0.1",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":4,"down":2,"is_up":true,"is_down":false}`, body)
+				assert.Equal(t, `{"up":4,"down":2,"is_up":true,"is_down":false,"admin_up":true,"admin_badge_name":"管理员"}`, body)
 			},
 		},
 		{
@@ -39,7 +39,7 @@ func TestVote(t *testing.T) {
 			ip:           "127.0.0.1",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":1,"down":2,"is_up":false,"is_down":true}`, body)
+				assert.Equal(t, `{"up":1,"down":2,"is_up":false,"is_down":true,"admin_up":false}`, body)
 			},
 		},
 		{
@@ -50,7 +50,7 @@ func TestVote(t *testing.T) {
 			ip:           "127.0.0.1",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":0,"down":0,"is_up":false,"is_down":false}`, body)
+				assert.Equal(t, `{"up":0,"down":0,"is_up":false,"is_down":false,"admin_up":false}`, body)
 			},
 		},
 		{
@@ -61,7 +61,7 @@ func TestVote(t *testing.T) {
 			ip:           "127.0.0.1",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":0,"down":0,"is_up":false,"is_down":false}`, body)
+				assert.Equal(t, `{"up":0,"down":0,"is_up":false,"is_down":false,"admin_up":false}`, body)
 			},
 		},
 		{
@@ -73,7 +73,7 @@ func TestVote(t *testing.T) {
 			ip:           "192.168.1.1",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":5,"down":2,"is_up":true,"is_down":false}`, body)
+				assert.Equal(t, `{"up":5,"down":2,"is_up":true,"is_down":false,"admin_up":true,"admin_badge_name":"管理员"}`, body)
 			},
 		},
 		{
@@ -85,7 +85,7 @@ func TestVote(t *testing.T) {
 			ip:           "192.168.1.2",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":4,"down":3,"is_up":false,"is_down":true}`, body)
+				assert.Equal(t, `{"up":4,"down":3,"is_up":false,"is_down":true,"admin_up":true,"admin_badge_name":"管理员"}`, body)
 			},
 		},
 		{
@@ -97,7 +97,7 @@ func TestVote(t *testing.T) {
 			ip:           "192.168.1.3",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":2,"down":2,"is_up":true,"is_down":false}`, body)
+				assert.Equal(t, `{"up":2,"down":2,"is_up":true,"is_down":false,"admin_up":false}`, body)
 			},
 		},
 		{
@@ -109,7 +109,7 @@ func TestVote(t *testing.T) {
 			ip:           "192.168.1.4",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":1,"down":3,"is_up":false,"is_down":true}`, body)
+				assert.Equal(t, `{"up":1,"down":3,"is_up":false,"is_down":true,"admin_up":false}`, body)
 			},
 		},
 		{
@@ -121,7 +121,7 @@ func TestVote(t *testing.T) {
 			ip:           "127.0.0.1",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":3,"down":2,"is_up":false,"is_down":false}`, body)
+				assert.Equal(t, `{"up":3,"down":2,"is_up":false,"is_down":false,"admin_up":false}`, body)
 			},
 		},
 		{
@@ -133,7 +133,7 @@ func TestVote(t *testing.T) {
 			ip:           "127.0.0.1",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":1,"down":1,"is_up":false,"is_down":false}`, body)
+				assert.Equal(t, `{"up":1,"down":1,"is_up":false,"is_down":false,"admin_up":false}`, body)
 			},
 		},
 		{
@@ -145,7 +145,7 @@ func TestVote(t *testing.T) {
 			ip:           "127.0.0.1",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":3,"down":3,"is_up":false,"is_down":true}`, body)
+				assert.Equal(t, `{"up":3,"down":3,"is_up":false,"is_down":true,"admin_up":false}`, body)
 			},
 		},
 		{
@@ -157,7 +157,7 @@ func TestVote(t *testing.T) {
 			ip:           "127.0.0.1",
 			expectedBody: func(t *testing.T, body string) {
 				assert.NotEmpty(t, body)
-				assert.Equal(t, `{"up":2,"down":1,"is_up":true,"is_down":false}`, body)
+				assert.Equal(t, `{"up":2,"down":1,"is_up":true,"is_down":false,"admin_up":false}`, body)
 			},
 		},
 	}
