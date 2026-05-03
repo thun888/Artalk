@@ -25,7 +25,7 @@ type ResponseStat struct {
 // @Summary      Statistic
 // @Description  Get the statistics of various data analysis
 // @Tags         Statistic
-// @Param        type        path   string      true   "The type of statistics"  Enums(latest_comments, latest_pages, pv_most_pages, comment_most_pages, page_pv, site_pv, page_comment, site_comment, rand_comments, rand_pages)
+// @Param        type        path   string      true   "The type of statistics"  Enums(latest_comments, latest_distinct_user_comments, latest_pages, pv_most_pages, comment_most_pages, page_pv, site_pv, page_comment, site_comment, rand_comments, rand_pages)
 // @Param        options     query  ParamsStat  false  "The options"
 // @Accept       json
 // @Produce      json
@@ -84,6 +84,46 @@ func Stat(app *core.App, router fiber.Router) {
 
 			return common.RespData(c, ResponseStat{
 				Data: app.Dao().CookAllComments(comments),
+			})
+
+		case "latest_distinct_user_comments":
+			// ------------------------------------
+			//  Latest comments with distinct user
+			//  每个用户只保留最新的一条评论，不够则继续读取
+			// ------------------------------------
+			seen := map[uint]bool{}
+			var result []*entity.Comment
+			offset := 0
+			batchSize := p.Limit * 3
+
+			for len(result) < p.Limit {
+				var batch []*entity.Comment
+				app.Dao().DB().Scopes(QueryComments).
+					Order("created_at DESC").
+					Limit(batchSize).
+					Offset(offset).
+					Find(&batch)
+
+				if len(batch) == 0 {
+					break
+				}
+
+				for _, comment := range batch {
+					if !seen[comment.UserID] {
+						seen[comment.UserID] = true
+						result = append(result, comment)
+						if len(result) >= p.Limit {
+							break
+						}
+					}
+				}
+
+				offset += batchSize
+				batchSize = p.Limit * 2
+			}
+
+			return common.RespData(c, ResponseStat{
+				Data: app.Dao().CookAllComments(result),
 			})
 
 		case "latest_pages":
