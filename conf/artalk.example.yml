@@ -143,6 +143,19 @@ moderator:
       - ./data/keywords_1.txt
     file_sep: "\n"
     replace_to: x
+  # AI Content Moderation
+  # (Use AI to detect spam comments, supports OpenAI and Anthropic endpoints)
+  # Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}}
+  ai:
+    enabled: false
+    type: openai # "openai" or "anthropic"
+    endpoint: "https://api.openai.com/v1/chat/completions"
+    api_key: ""
+    model: "abcd"
+    system_prompt: "You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."
+    user_prompt: "{{content}}"
+    thinking: false
+    max_tokens: 1024
 
 # Captcha
 captcha:
@@ -253,6 +266,7 @@ admin_notify:
   telegram:
     enabled: false
     api_token: ""
+    api_endpoint: "" # 自定义 Telegram Bot API 端点 (格式: https://tg.example.com/bot%s/%s)
     receivers:
       - 7777777
   # Bark

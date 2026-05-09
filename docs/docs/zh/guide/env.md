@@ -108,6 +108,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 | **ATK_ADMIN_NOTIFY_SLACK_ENABLED** | `false` | 启用 | admin_notify.slack.enabled (多元推送 > Slack > Enabled) |
 | **ATK_ADMIN_NOTIFY_SLACK_OAUTH_TOKEN** | `""` | OauthToken | admin_notify.slack.oauth_token (多元推送 > Slack > OauthToken) |
 | **ATK_ADMIN_NOTIFY_SLACK_RECEIVERS** | `[CHANNEL_ID]` | Receivers | admin_notify.slack.receivers (多元推送 > Slack > Receivers) |
+| **ATK_ADMIN_NOTIFY_TELEGRAM_API_ENDPOINT** | `""` | 自定义 Telegram Bot API 端点 (格式: https://tg.example.com/bot%s/%s) | admin_notify.telegram.api_endpoint (多元推送 > Telegram > 自定义 Telegram Bot API 端点) |
 | **ATK_ADMIN_NOTIFY_TELEGRAM_API_TOKEN** | `""` | ApiToken | admin_notify.telegram.api_token (多元推送 > Telegram > ApiToken) |
 | **ATK_ADMIN_NOTIFY_TELEGRAM_ENABLED** | `false` | 启用 | admin_notify.telegram.enabled (多元推送 > Telegram > Enabled) |
 | **ATK_ADMIN_NOTIFY_TELEGRAM_RECEIVERS** | `[7777777]` | Receivers | admin_notify.telegram.receivers (多元推送 > Telegram > Receivers) |
@@ -325,6 +326,15 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 | 环境变量 | 默认值 | 描述 | 路径 |
 | --- | --- | --- | --- |
+| **ATK_MODERATOR_AI_API_KEY** | `""` | ApiKey | moderator.ai.api_key (评论审核 > AI 内容审核 （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点） user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}} > ApiKey) |
+| **ATK_MODERATOR_AI_ENABLED** | `false` | 启用 | moderator.ai.enabled (评论审核 > AI 内容审核 （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点） user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}} > Enabled) |
+| **ATK_MODERATOR_AI_ENDPOINT** | `"https://api.openai.com/v1/chat/completions"` | Endpoint | moderator.ai.endpoint (评论审核 > AI 内容审核 （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点） user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}} > Endpoint) |
+| **ATK_MODERATOR_AI_MAX_TOKENS** | `1024` | MaxTokens | moderator.ai.max_tokens (评论审核 > AI 内容审核 （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点） user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}} > MaxTokens) |
+| **ATK_MODERATOR_AI_MODEL** | `"abcd"` | Model | moderator.ai.model (评论审核 > AI 内容审核 （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点） user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}} > Model) |
+| **ATK_MODERATOR_AI_SYSTEM_PROMPT** | `"You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."` | SystemPrompt | moderator.ai.system_prompt (评论审核 > AI 内容审核 （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点） user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}} > SystemPrompt) |
+| **ATK_MODERATOR_AI_THINKING** | `false` | Thinking | moderator.ai.thinking (评论审核 > AI 内容审核 （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点） user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}} > Thinking) |
+| **ATK_MODERATOR_AI_TYPE** | `"openai"` | "openai" or "anthropic" | moderator.ai.type (评论审核 > AI 内容审核 （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点） user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}} > "openai" or "anthropic") |
+| **ATK_MODERATOR_AI_USER_PROMPT** | `"{{content}}"` | UserPrompt | moderator.ai.user_prompt (评论审核 > AI 内容审核 （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点） user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}} > UserPrompt) |
 | **ATK_MODERATOR_AKISMET_KEY** | `""` | Akismet Key (Akismet 反垃圾服务，https://akismet.com) | moderator.akismet_key (评论审核 > Akismet Key) |
 | **ATK_MODERATOR_ALIYUN_ACCESS_KEY_ID** | `""` | AccessKeyId | moderator.aliyun.access_key_id (评论审核 > 阿里云内容安全 > AccessKeyId) |
 | **ATK_MODERATOR_ALIYUN_ACCESS_KEY_SECRET** | `""` | AccessKeySecret | moderator.aliyun.access_key_secret (评论审核 > 阿里云内容安全 > AccessKeySecret) |

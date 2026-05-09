@@ -94,11 +94,13 @@ admin_notify:
   telegram:
     enabled: true
     api_token: ''
+    api_endpoint: '' # Custom Telegram Bot API endpoint (format: https://tg.example.com/bot%s/%s)
     receivers:
       - 7777777
 ```
 
 - `api_token`: The API token for the TG Bot.
+- `api_endpoint`: Custom Telegram Bot API endpoint, used for proxying or using a local Telegram Bot API server. Format: `https://tg.example.com/bot%s/%s`.
 - `receivers`: The numeric IDs of the message recipients, multiple recipients can be set.
 
 ### Creating a TG Bot

@@ -94,11 +94,13 @@ admin_notify:
   telegram:
     enabled: true
     api_token: ''
+    api_endpoint: '' # 自定义 Telegram Bot API 端点 (格式: https://tg.example.com/bot%s/%s)
     receivers:
       - 7777777
 ```
 
 - `api_token`：TG Bot 的 API Token。
+- `api_endpoint`：自定义 Telegram Bot API 端点，用于代理或使用 Telegram Bot API 本地服务器。格式：`https://tg.example.com/bot%s/%s`。
 - `receivers`：消息接受者的数字 ID，可设置多个。
 
 ### 创建 TG Bot

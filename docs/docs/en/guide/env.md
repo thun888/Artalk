@@ -107,6 +107,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 | **ATK_ADMIN_NOTIFY_SLACK_ENABLED** | `false` | 启用 | admin_notify.slack.enabled (Multi-Push > Slack > Enabled) |
 | **ATK_ADMIN_NOTIFY_SLACK_OAUTH_TOKEN** | `""` | OauthToken | admin_notify.slack.oauth_token (Multi-Push > Slack > OauthToken) |
 | **ATK_ADMIN_NOTIFY_SLACK_RECEIVERS** | `[CHANNEL_ID]` | Receivers | admin_notify.slack.receivers (Multi-Push > Slack > Receivers) |
+| **ATK_ADMIN_NOTIFY_TELEGRAM_API_ENDPOINT** | `""` | 自定义 Telegram Bot API 端点 (格式: https://tg.example.com/bot%s/%s) | admin_notify.telegram.api_endpoint (Multi-Push > Telegram > 自定义 Telegram Bot API 端点) |
 | **ATK_ADMIN_NOTIFY_TELEGRAM_API_TOKEN** | `""` | ApiToken | admin_notify.telegram.api_token (Multi-Push > Telegram > ApiToken) |
 | **ATK_ADMIN_NOTIFY_TELEGRAM_ENABLED** | `false` | 启用 | admin_notify.telegram.enabled (Multi-Push > Telegram > Enabled) |
 | **ATK_ADMIN_NOTIFY_TELEGRAM_RECEIVERS** | `[7777777]` | Receivers | admin_notify.telegram.receivers (Multi-Push > Telegram > Receivers) |
@@ -315,6 +316,15 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 | 环境变量 | 默认值 | 描述 | 路径 |
 | --- | --- | --- | --- |
+| **ATK_MODERATOR_AI_API_KEY** | `""` | ApiKey | moderator.ai.api_key (Moderator > AI Content Moderation  Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}} > ApiKey) |
+| **ATK_MODERATOR_AI_ENABLED** | `false` | 启用 | moderator.ai.enabled (Moderator > AI Content Moderation  Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}} > Enabled) |
+| **ATK_MODERATOR_AI_ENDPOINT** | `"https://api.openai.com/v1/chat/completions"` | Endpoint | moderator.ai.endpoint (Moderator > AI Content Moderation  Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}} > Endpoint) |
+| **ATK_MODERATOR_AI_MAX_TOKENS** | `1024` | MaxTokens | moderator.ai.max_tokens (Moderator > AI Content Moderation  Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}} > MaxTokens) |
+| **ATK_MODERATOR_AI_MODEL** | `"abcd"` | Model | moderator.ai.model (Moderator > AI Content Moderation  Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}} > Model) |
+| **ATK_MODERATOR_AI_SYSTEM_PROMPT** | `"You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."` | SystemPrompt | moderator.ai.system_prompt (Moderator > AI Content Moderation  Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}} > SystemPrompt) |
+| **ATK_MODERATOR_AI_THINKING** | `false` | Thinking | moderator.ai.thinking (Moderator > AI Content Moderation  Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}} > Thinking) |
+| **ATK_MODERATOR_AI_TYPE** | `"openai"` | "openai" or "anthropic" | moderator.ai.type (Moderator > AI Content Moderation  Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}} > "openai" or "anthropic") |
+| **ATK_MODERATOR_AI_USER_PROMPT** | `"{{content}}"` | UserPrompt | moderator.ai.user_prompt (Moderator > AI Content Moderation  Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}} > UserPrompt) |
 | **ATK_MODERATOR_AKISMET_KEY** | `""` | Akismet Key (Akismet anti-spam service, https://akismet.com) | moderator.akismet_key (Moderator > Akismet Key) |
 | **ATK_MODERATOR_ALIYUN_ACCESS_KEY_ID** | `""` | AccessKeyId | moderator.aliyun.access_key_id (Moderator > Aliyun Content Security > AccessKeyId) |
 | **ATK_MODERATOR_ALIYUN_ACCESS_KEY_SECRET** | `""` | AccessKeySecret | moderator.aliyun.access_key_secret (Moderator > Aliyun Content Security > AccessKeySecret) |

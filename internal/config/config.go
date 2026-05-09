@@ -124,6 +124,7 @@ type ModeratorConf struct {
 	Tencent        TencentAntispamConf  `koanf:"tencent" json:"tencent"`
 	Aliyun         AliyunAntispamConf   `koanf:"aliyun" json:"aliyun"`
 	Keywords       KeyWordsAntispamConf `koanf:"keywords" json:"keywords"`
+	AI             AIAntispamConf       `koanf:"ai" json:"ai"`
 }
 
 // 腾讯云反垃圾
@@ -140,6 +141,19 @@ type AliyunAntispamConf struct {
 	AccessKeyID     string `koanf:"access_key_id" json:"access_key_id"`
 	AccessKeySecret string `koanf:"access_key_secret" json:"access_key_secret"`
 	Region          string `koanf:"region" json:"region"`
+}
+
+// AI 反垃圾
+type AIAntispamConf struct {
+	Enabled      bool   `koanf:"enabled" json:"enabled"`
+	Type         string `koanf:"type" json:"type"`                   // "openai" 或 "anthropic"
+	Endpoint     string `koanf:"endpoint" json:"endpoint"`           // 完整 API 端点地址
+	ApiKey       string `koanf:"api_key" json:"api_key"`             // API 密钥
+	Model        string `koanf:"model" json:"model"`                 // 模型名称
+	SystemPrompt string `koanf:"system_prompt" json:"system_prompt"` // 系统提示词
+	UserPrompt   string `koanf:"user_prompt" json:"user_prompt"`     // 用户提示词（支持占位符）
+	Thinking     bool   `koanf:"thinking" json:"thinking"`           // 是否启用思考模式
+	MaxTokens    int    `koanf:"max_tokens" json:"max_tokens"`       // 最大输出 token 数
 }
 
 // 关键词词库过滤
@@ -326,9 +340,10 @@ type AdminEmailConf struct {
 }
 
 type NotifyTelegramConf struct {
-	Enabled   bool    `koanf:"enabled" json:"enabled"`
-	ApiToken  string  `koanf:"api_token" json:"api_token"`
-	Receivers []int64 `koanf:"receivers" json:"receivers"`
+	Enabled      bool    `koanf:"enabled" json:"enabled"`
+	ApiToken     string  `koanf:"api_token" json:"api_token"`
+	ApiEndpoint  string  `koanf:"api_endpoint" json:"api_endpoint"`   // 自定义 Telegram Bot API 端点
+	Receivers    []int64 `koanf:"receivers" json:"receivers"`
 }
 
 type NotifyDingTalkConf struct {
