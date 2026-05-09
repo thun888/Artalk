@@ -72,3 +72,4 @@ test-results
 
 # TypeScript composite build declaration output
 .tsbuildinfo-dts/
+.claude
