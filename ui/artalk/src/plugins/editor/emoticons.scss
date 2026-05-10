@@ -50,15 +50,31 @@
     left: 0;
     width: 100%;
     background: var(--at-color-bg-transl);
-    height: 30px;
+    height: 35px;
     border-top: 1px solid var(--at-color-border);
     border-bottom: 1px solid var(--at-color-border);
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--at-color-main);
+      border-radius: 3px;
+    }
 
     & > span {
       user-select: none;
       padding: 0 10px;
-      line-height: 30px;
-      float: left;
+      line-height: 35px;
       display: block;
       cursor: pointer;
       font-size: $font-size;
