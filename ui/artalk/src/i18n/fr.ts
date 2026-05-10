@@ -21,6 +21,7 @@ export default defineLocaleExternal(
     restoredMsg: 'Le contenu a été restauré',
     onlyAdminCanReply: 'Seul l’administrateur peut répondre',
     uploadLoginMsg: 'Veuillez remplir votre nom et email pour télécharger',
+    uploadingWaitMsg: "Veuillez attendre la fin du téléchargement de l'image",
 
     /* List */
     counter: '{count} Commentaires',

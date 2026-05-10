@@ -19,6 +19,7 @@ export default defineLocaleExternal('zh-TW', {
   restoredMsg: '內容已自動恢復',
   onlyAdminCanReply: '僅管理員可評論',
   uploadLoginMsg: '填入你的名字郵箱才能上傳哦',
+  uploadingWaitMsg: '請等待圖片上傳完成',
 
   /* List */
   counter: '{count} 條評論',

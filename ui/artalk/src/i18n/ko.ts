@@ -21,6 +21,7 @@ export default defineLocaleExternal(
     restoredMsg: '내용이 복원되었습니다',
     onlyAdminCanReply: '관리자만 답글을 달 수 있습니다',
     uploadLoginMsg: '이름과 이메일을 입력하여 업로드하세요',
+    uploadingWaitMsg: '이미지 업로드가 완료될 때까지 기다려 주세요',
 
     /* List */
     counter: '{count} 댓글',

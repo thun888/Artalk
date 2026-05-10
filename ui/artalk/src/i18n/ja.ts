@@ -21,6 +21,7 @@ export default defineLocaleExternal(
     restoredMsg: '内容が自動的に復元されました',
     onlyAdminCanReply: '管理者のみがコメントできます',
     uploadLoginMsg: '名前とメールアドレスを入力してからアップロードしてください',
+    uploadingWaitMsg: '画像のアップロードが完了するまでお待ちください',
 
     /* List */
     counter: '{count}件のコメント',

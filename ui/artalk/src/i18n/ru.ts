@@ -21,6 +21,7 @@ export default defineLocaleExternal(
     restoredMsg: 'Содержимое было восстановлено',
     onlyAdminCanReply: 'Только администратор может ответить',
     uploadLoginMsg: 'Пожалуйста, введите имя и электронную почту для загрузки',
+    uploadingWaitMsg: 'Пожалуйста, дождитесь завершения загрузки изображения',
 
     /* List */
     counter: '{count} Комментариев',
