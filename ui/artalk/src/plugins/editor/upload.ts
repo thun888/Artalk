@@ -8,6 +8,11 @@ const AllowImgExts = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'svg', 'webp']
 
 export default class Upload extends EditorPlugin {
   private $imgUploadInput?: HTMLInputElement
+  private uploadingCount = 0
+
+  isUploading() {
+    return this.uploadingCount > 0
+  }
 
   constructor(kit: PlugKit) {
     super(kit)
@@ -113,44 +118,49 @@ export default class Upload extends EditorPlugin {
     const uploadPlaceholderTxt = `${insertPrefix}![](Uploading ${file.name}...)`
     this.kit.useEditor().insertContent(uploadPlaceholderTxt)
 
-    // 上传图片
-    let resp: { public_url: string } | undefined
+    this.uploadingCount++
     try {
-      const customUploaderFn = this.kit.useConf().imgUploader
-      if (!customUploaderFn) {
-        // 使用 Artalk 进行图片上传
-        resp = (await this.kit.useApi().upload.upload({ file })).data
-      } else {
-        // 使用自定义的图片上传器
-        resp = { public_url: await customUploaderFn(file) }
+      // 上传图片
+      let resp: { public_url: string } | undefined
+      try {
+        const customUploaderFn = this.kit.useConf().imgUploader
+        if (!customUploaderFn) {
+          // 使用 Artalk 进行图片上传
+          resp = (await this.kit.useApi().upload.upload({ file })).data
+        } else {
+          // 使用自定义的图片上传器
+          resp = { public_url: await customUploaderFn(file) }
+        }
+      } catch (err: any) {
+        console.error(err)
+        this.kit.useEditor().showNotify(`${$t('uploadFail')}: ${err.message}`, 'e')
       }
-    } catch (err: any) {
-      console.error(err)
-      this.kit.useEditor().showNotify(`${$t('uploadFail')}: ${err.message}`, 'e')
-    }
-    if (!!resp && resp.public_url) {
-      let imgURL = resp.public_url as string
+      if (!!resp && resp.public_url) {
+        let imgURL = resp.public_url as string
 
-      // 若为相对路径，加上 artalk server
-      if (!Utils.isValidURL(imgURL))
-        imgURL = Utils.getURLBasedOnApi({
-          base: this.kit.useConf().server,
-          path: imgURL,
-        })
+        // 若为相对路径，加上 artalk server
+        if (!Utils.isValidURL(imgURL))
+          imgURL = Utils.getURLBasedOnApi({
+            base: this.kit.useConf().server,
+            path: imgURL,
+          })
 
-      // 上传成功插入图片
-      this.kit
-        .useEditor()
-        .setContent(
-          this.kit
-            .useUI()
-            .$textarea.value.replace(uploadPlaceholderTxt, `${insertPrefix}![](${imgURL})`),
-        )
-    } else {
-      // 上传失败删除加载文字
-      this.kit
-        .useEditor()
-        .setContent(this.kit.useUI().$textarea.value.replace(uploadPlaceholderTxt, ''))
+        // 上传成功插入图片
+        this.kit
+          .useEditor()
+          .setContent(
+            this.kit
+              .useUI()
+              .$textarea.value.replace(uploadPlaceholderTxt, `${insertPrefix}![](${imgURL})`),
+          )
+      } else {
+        // 上传失败删除加载文字
+        this.kit
+          .useEditor()
+          .setContent(this.kit.useUI().$textarea.value.replace(uploadPlaceholderTxt, ''))
+      }
+    } finally {
+      this.uploadingCount--
     }
   }
 }

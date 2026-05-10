@@ -1,6 +1,7 @@
 import EditorPlugin from './_plug'
 import type PlugKit from './_kit'
 import SubmitAddPreset from './submit-add'
+import Upload from './upload'
 import $t from '@/i18n'
 import type { CommentData } from '@/types'
 
@@ -39,6 +40,12 @@ export default class Submit extends EditorPlugin {
   private async do() {
     if (this.kit.useEditor().getContentFinal().trim() === '') {
       this.kit.useEditor().focus()
+      return
+    }
+
+    const uploadPlug = this.kit.useDeps(Upload)
+    if (uploadPlug?.isUploading()) {
+      this.kit.useEditor().showNotify($t('uploadingWaitMsg'), 'w')
       return
     }
 
