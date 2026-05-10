@@ -145,18 +145,25 @@ moderator:
     file_sep: "\n"
     # 替换字符
     replace_to: x
-# AI 内容审核
-# （使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点）
-# user_prompt 中可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}}
+  # AI 内容审核
+  # (使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点)
   ai:
     enabled: false
-    type: openai # "openai" or "anthropic"
+    # 端点类型 ("openai" 或 "anthropic")
+    type: openai
+    # 端点URL(完整链接，示例: "https://api.openai.com/v1/chat/completions")
     endpoint: "https://api.openai.com/v1/chat/completions"
+    # AI API Key
     api_key: ""
+    # AI 模型名称
     model: "abcd"
+    # 系统提示词(模型的角色设定，建议包含明确的垃圾评论定义和判断标准，并以 JSON 格式返回结果)
     system_prompt: "You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."
+    # 用户提示词(可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}})
     user_prompt: "{{content}}"
+    # 思考模式
     thinking: false
+    # 最大 tokens 数量
     max_tokens: 1024
 # 验证码
 captcha:
@@ -273,7 +280,7 @@ admin_notify:
   telegram:
     enabled: false
     api_token: ""
-    api_endpoint: "" # 自定义 Telegram Bot API 端点 (格式: https://tg.example.com/bot%s/%s)
+    api_endpoint: "" # 自定义 Telegram Bot API 端点 (例如: https://tg.example.com)
     receivers:
       - 7777777
   # Bark
