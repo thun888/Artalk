@@ -144,17 +144,24 @@ moderator:
     file_sep: "\n"
     replace_to: x
   # AI Content Moderation
-  # (Use AI to detect spam comments, supports OpenAI and Anthropic endpoints)
-  # Available placeholders in user_prompt: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}}
+  # (Uses AI to detect spam comments, supports OpenAI and Anthropic endpoints)
   ai:
     enabled: false
-    type: openai # "openai" or "anthropic"
+    # Endpoint type ("openai" or "anthropic")
+    type: openai
+    # Endpoint URL (full URL, like "https://api.openai.com/v1/chat/completions")
     endpoint: "https://api.openai.com/v1/chat/completions"
+    # AI API Key
     api_key: ""
+    # AI model name
     model: "abcd"
+    # System prompt (Defines the model's role. It's recommended to include clear spam definitions, judging criteria, and return the result in JSON format)
     system_prompt: "You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."
+    # User prompt (Available placeholders: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}})
     user_prompt: "{{content}}"
+    # Thinking mode
     thinking: false
+    # Max tokens
     max_tokens: 1024
 
 # Captcha

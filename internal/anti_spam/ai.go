@@ -17,10 +17,18 @@ import (
 var _ Checker = (*AIChecker)(nil)
 
 const (
-	aiHTTPTimeout      = 30 * time.Second
-	aiMaxContentRunes  = 2000
-	aiResponseMaxBytes = 1024
+	aiHTTPTimeout          = 300 * time.Second
+	aiMaxContentRunes      = 2000
+	aiRespMaxBytesNormal   = 1024
+	aiRespMaxBytesThinking = 64 * 1024
 )
+
+func (c *AIChecker) respMaxBytes() int64 {
+	if c.conf.Thinking {
+		return aiRespMaxBytesThinking
+	}
+	return aiRespMaxBytesNormal
+}
 
 type AICheckerConf struct {
 	Type         string
@@ -120,7 +128,7 @@ type aiJudgement struct {
 // Expected format: {"result": true/false, "reason": "..."}
 // result=true means spam, result=false means not spam.
 func parseAIJudgement(respText string) (bool, string, error) {
-	trimmed := strings.TrimSpace(respText)
+	trimmed := cleanAIResponse(respText)
 
 	var j aiJudgement
 	if err := json.Unmarshal([]byte(trimmed), &j); err != nil {
@@ -128,6 +136,42 @@ func parseAIJudgement(respText string) (bool, string, error) {
 	}
 
 	return j.Result, j.Reason, nil
+}
+
+// cleanAIResponse strips thinking tags and markdown code fences from the AI response,
+// extracting only the JSON payload.
+func cleanAIResponse(text string) string {
+	// Remove <think>...</think> blocks (non-greedy)
+	for {
+		start := strings.Index(text, "<think>")
+		if start == -1 {
+			break
+		}
+		end := strings.Index(text[start:], "</think>")
+		if end == -1 {
+			// No closing tag, remove everything from <think> onwards
+			text = text[:start]
+			break
+		}
+		text = text[:start] + text[start+end+8:]
+	}
+
+	text = strings.TrimSpace(text)
+
+	// Strip markdown code fences: ```json ... ``` or ``` ... ```
+	if strings.HasPrefix(text, "```") {
+		// Find first newline after opening fence
+		if nl := strings.Index(text, "\n"); nl != -1 {
+			text = text[nl+1:]
+		}
+		// Remove trailing closing fence
+		if idx := strings.LastIndex(text, "```"); idx != -1 {
+			text = text[:idx]
+		}
+		text = strings.TrimSpace(text)
+	}
+
+	return text
 }
 
 // truncateText truncates text to maxRunes characters, appending "..." if truncated.
@@ -202,7 +246,7 @@ func (c *AIChecker) callOpenAI(systemMsg, userMsg string) (string, error) {
 	}
 	defer resp.Body.Close()
 
-	respBody, err := io.ReadAll(io.LimitReader(resp.Body, aiResponseMaxBytes))
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, c.respMaxBytes()))
 	if err != nil {
 		return "", err
 	}
@@ -292,7 +336,7 @@ func (c *AIChecker) callAnthropic(systemMsg, userMsg string) (string, error) {
 	}
 	defer resp.Body.Close()
 
-	respBody, err := io.ReadAll(io.LimitReader(resp.Body, aiResponseMaxBytes))
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, c.respMaxBytes()))
 	if err != nil {
 		return "", err
 	}

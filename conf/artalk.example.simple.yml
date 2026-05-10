@@ -130,7 +130,7 @@ admin_notify:
   telegram:
     enabled: false
     api_token: ""
-    api_endpoint: "" # 自定义 Telegram Bot API 端点 (格式: https://tg.example.com/bot%s/%s)
+    api_endpoint: "" # 自定义 Telegram Bot API 端点 (例如: https://tg.example.com)
     receivers:
       - 7777777
   bark:
