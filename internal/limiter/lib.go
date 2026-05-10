@@ -23,7 +23,7 @@ func (l *Limiter) isTimeoutSinceLastAction(ip string) bool {
 
 // 修改最后操作时间
 func (l *Limiter) logTime(ip string) {
-	l.store.Set(ActionTimeCachePrefix+ip, strconv.FormatInt(time.Now().Unix(), 10))
+	l.store.Set(ActionTimeCachePrefix+ip, strconv.FormatInt(time.Now().UnixMilli(), 10))
 }
 
 // 获取最后操作时间
@@ -32,7 +32,7 @@ func (l *Limiter) getLastTime(ip string) time.Time {
 	if val, found := l.store.Get(ActionTimeCachePrefix + ip); found {
 		timestamp, _ = strconv.ParseInt(val.(string), 10, 64)
 	}
-	return time.Unix(timestamp, 0)
+	return time.Unix(0, timestamp*int64(time.Millisecond))
 }
 
 // 获取操作次数
