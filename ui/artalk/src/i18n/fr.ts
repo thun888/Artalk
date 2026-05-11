@@ -22,6 +22,7 @@ export default defineLocaleExternal(
     onlyAdminCanReply: 'Seul l’administrateur peut répondre',
     uploadLoginMsg: 'Veuillez remplir votre nom et email pour télécharger',
     uploadingWaitMsg: "Veuillez attendre la fin du téléchargement de l'image",
+    refresh: 'Rafraîchir',
 
     /* List */
     counter: '{count} Commentaires',

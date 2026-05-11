@@ -13,6 +13,7 @@ import Mover from './mover'
 import Emoticons from './emoticons'
 import Upload from './upload'
 import Preview from './preview'
+import Refresh from './refresh'
 import type { Config } from '@/types'
 
 /** The default enabled plugs */
@@ -34,6 +35,7 @@ const EDITOR_PLUGS: (typeof EditorPlugin)[] = [
   Emoticons,
   Upload,
   Preview,
+  Refresh,
 ]
 
 /**
