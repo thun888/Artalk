@@ -147,7 +147,7 @@ moderator:
   # (Uses AI to detect spam comments, supports OpenAI and Anthropic endpoints)
   ai:
     enabled: false
-    # Endpoint type ("openai" or "anthropic")
+    # Endpoint type ["openai", "anthropic"]
     type: openai
     # Endpoint URL (full URL, like "https://api.openai.com/v1/chat/completions")
     endpoint: "https://api.openai.com/v1/chat/completions"

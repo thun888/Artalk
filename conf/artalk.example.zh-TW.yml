@@ -149,7 +149,7 @@ moderator:
   # (使用 AI 偵測垃圾留言，支援 OpenAI 和 Anthropic 端點)
   ai:
     enabled: false
-    # 端點類型 ("openai" 或 "anthropic")
+    # 端點類型 ["openai", "anthropic"]
     type: openai
     # 端點 URL (完整鏈接，示例: "https://api.openai.com/v1/chat/completions")
     endpoint: "https://api.openai.com/v1/chat/completions"
