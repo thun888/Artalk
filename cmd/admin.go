@@ -7,6 +7,7 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/artalkjs/artalk/v2/internal/dao"
 	"github.com/artalkjs/artalk/v2/internal/entity"
 	"github.com/artalkjs/artalk/v2/internal/i18n"
 	"github.com/artalkjs/artalk/v2/internal/log"
@@ -48,26 +49,30 @@ func NewAdminCommand(app *ArtalkCmd) *cobra.Command {
 
 				log.Info(i18n.T("{{name}} already exists", map[string]interface{}{"name": i18n.T("Account")}) +
 					", " + i18n.T("Password updated"))
-				return
+			} else {
+				user := entity.User{
+					Name:       username,
+					Email:      email,
+					IsAdmin:    true,
+					BadgeName:  i18n.T("Admin"),
+					BadgeColor: "#0083FF",
+				}
+				user.SetPasswordEncrypt(password)
+
+				if err := app.Dao().CreateUser(&user); err != nil {
+					log.Fatal(err)
+				}
+
+				fmt.Println("--------------------------------")
+				fmt.Println("  Name: " + username)
+				fmt.Println("  Mail: " + email)
+				fmt.Println("--------------------------------")
 			}
 
-			user := entity.User{
-				Name:       username,
-				Email:      email,
-				IsAdmin:    true,
-				BadgeName:  i18n.T("Admin"),
-				BadgeColor: "#0083FF",
-			}
-			user.SetPasswordEncrypt(password)
-
-			if err := app.Dao().CreateUser(&user); err != nil {
-				log.Fatal(err)
-			}
-
-			fmt.Println("--------------------------------")
-			fmt.Println("  Name: " + username)
-			fmt.Println("  Mail: " + email)
-			fmt.Println("--------------------------------")
+			// 同步完成后清除管理员缓存
+			app.Dao().CacheAction(func(cache *dao.DaoCache) {
+				cache.AdminCacheDel()
+			})
 		},
 	}
 
