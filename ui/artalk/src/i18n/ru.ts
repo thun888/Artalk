@@ -22,6 +22,7 @@ export default defineLocaleExternal(
     onlyAdminCanReply: 'Только администратор может ответить',
     uploadLoginMsg: 'Пожалуйста, введите имя и электронную почту для загрузки',
     uploadingWaitMsg: 'Пожалуйста, дождитесь завершения загрузки изображения',
+    refresh: 'Обновить',
 
     /* List */
     counter: '{count} Комментариев',

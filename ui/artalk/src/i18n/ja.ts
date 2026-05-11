@@ -22,6 +22,7 @@ export default defineLocaleExternal(
     onlyAdminCanReply: '管理者のみがコメントできます',
     uploadLoginMsg: '名前とメールアドレスを入力してからアップロードしてください',
     uploadingWaitMsg: '画像のアップロードが完了するまでお待ちください',
+    refresh: '更新',
 
     /* List */
     counter: '{count}件のコメント',

@@ -18,6 +18,7 @@ const en = {
   onlyAdminCanReply: 'Only admin can reply',
   uploadLoginMsg: 'Please fill in your name and email to upload',
   uploadingWaitMsg: 'Please wait for the image upload to complete',
+  refresh: 'Refresh',
 
   /* List */
   counter: '{count} Comments',
