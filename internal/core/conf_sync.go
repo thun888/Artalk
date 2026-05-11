@@ -3,6 +3,7 @@ package core
 import (
 	"strconv"
 
+	"github.com/artalkjs/artalk/v2/internal/dao"
 	"github.com/artalkjs/artalk/v2/internal/entity"
 	"github.com/artalkjs/artalk/v2/internal/log"
 )
@@ -52,6 +53,11 @@ func (app *App) syncFromConf() {
 			app.dao.UpdateUser(&user)
 		}
 	}
+
+	// 同步完成后清除管理员缓存
+	app.Dao().CacheAction(func(cache *dao.DaoCache) {
+		cache.AdminCacheDel()
+	})
 
 	// 清理配置文件中不存在的用户
 	// var dbAdminUsers []User

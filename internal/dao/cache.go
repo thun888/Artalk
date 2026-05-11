@@ -20,6 +20,7 @@ const (
 	CommentByIDKey         = "comment#id=%d"
 	CommentChildIDsByIDKey = "comment_child_ids#id=%d"
 	NotifyByUserCommentKey = "notify#user_id=%d;comment_id=%d"
+	AdminIDsKey            = "admin_ids"
 )
 
 type DaoCache struct {
@@ -127,4 +128,14 @@ func (c *DaoCache) ChildCommentCacheDel(comment *entity.Comment) {
 		c.DelCache(fmt.Sprintf(CommentChildIDsByIDKey, comment.Rid))
 		// TODO 从 slice 中 remove 并更新缓存而不是直接删除缓存，删除缓存会导致重新查询 db 而性能下降
 	}
+}
+
+// AdminCacheSave 保存管理员 ID 列表到缓存
+func (c *DaoCache) AdminCacheSave(ids []uint) error {
+	return c.StoreCache(ids, AdminIDsKey)
+}
+
+// AdminCacheDel 清除管理员 ID 缓存
+func (c *DaoCache) AdminCacheDel() {
+	c.DelCache(AdminIDsKey)
 }

@@ -234,18 +234,32 @@ func (dao *Dao) GetVoteNumUpDown(targetName string, targetID uint) (int, int) {
 
 // #region 管理员账号检测
 func (dao *Dao) GetAllAdmins() []entity.User {
-	// TODO add cache and flush cache when admin changed
 	var admins []entity.User
 	dao.DB().Where(&entity.User{IsAdmin: true}).Find(&admins)
 	return admins
 }
 
 func (dao *Dao) GetAllAdminIDs() []uint {
+	// 尝试从缓存获取
+	if dao.cache != nil {
+		var ids []uint
+		if err := dao.cache.FindCache(AdminIDsKey, &ids); err == nil {
+			return ids
+		}
+	}
+
+	// 缓存未命中，查询数据库
 	admins := dao.GetAllAdmins()
-	ids := []uint{}
+	ids := make([]uint, 0, len(admins))
 	for _, a := range admins {
 		ids = append(ids, a.ID)
 	}
+
+	// 存入缓存
+	if dao.cache != nil {
+		_ = dao.cache.AdminCacheSave(ids)
+	}
+
 	return ids
 }
 

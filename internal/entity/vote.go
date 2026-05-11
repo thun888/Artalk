@@ -18,8 +18,8 @@ const (
 type Vote struct {
 	gorm.Model
 
-	TargetID uint     `gorm:"index"` // 投票对象
-	Type     VoteType `gorm:"index"`
+	TargetID uint     `gorm:"index:idx_votes_target_type"` // 投票对象
+	Type     VoteType `gorm:"index:idx_votes_target_type"`
 
 	UserID uint `gorm:"index"` // 投票者
 	UA     string
