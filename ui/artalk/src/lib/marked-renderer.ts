@@ -1,5 +1,6 @@
 import { marked, Tokens } from 'marked'
 import { renderCode } from './highlight'
+import { applyRedirectTemplate } from './link-redirect'
 import type { Config } from '@/types'
 
 export interface RendererOptions {
@@ -24,6 +25,10 @@ const markedLinkRenderer =
       }
     }
     const isSameOriginLink = getLinkOrigin(args.href) === window.location.origin
+
+    // Apply external link redirect template
+    args.href = applyRedirectTemplate(args.href)
+
     const html = orgLinkRenderer.call(renderer, args)
     return html.replace(
       /^<a /,

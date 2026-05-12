@@ -47,6 +47,11 @@ export const Fetch: ArtalkPlugin = (ctx) => {
         // refactor work is hard, because it is used in many places.
         ctx.getData().setListLastFetch({ params, data })
 
+        // 存储站点外链跳转模板（须在 loadComments 之前，确保渲染时模板已就绪）
+        ctx
+          .getData()
+          .setSiteExternalLinkRedirectTemplate(data.site_external_link_redirect_tpl || '')
+
         // 装置评论
         ctx.getData().loadComments(data.comments)
 

@@ -87,6 +87,9 @@ export interface ListData {
 
   /** 页面信息 */
   page: PageData
+
+  /** 站点外链跳转模板 */
+  site_external_link_redirect_tpl?: string
 }
 
 export interface PageData {
@@ -130,6 +133,9 @@ export interface SiteData {
 
   /** 站点主 URL */
   first_url: string
+
+  /** 外链跳转模板 */
+  external_link_redirect_template?: string
 }
 
 export interface UserData {
@@ -248,6 +254,9 @@ export interface DataManager {
 
   getPage(): PageData | undefined
   updatePage(pageData: PageData): void
+
+  getSiteExternalLinkRedirectTemplate(): string
+  setSiteExternalLinkRedirectTemplate(tpl: string): void
 }
 
 export type NotifyLevel = 'i' | 's' | 'w' | 'e'

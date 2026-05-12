@@ -98,6 +98,7 @@ export const fr: MessageSchema = {
   logout: 'Déconnexion',
   logoutConfirm: 'Êtes-vous sûr de vouloir vous déconnecter ?',
   loginSelectHint: 'Veuillez sélectionner le compte avec lequel vous souhaitez vous connecter :',
+  editLinkRedirectTemplate: 'Modèle de redirection',
 }
 
 export default fr

@@ -97,6 +97,7 @@ export const ru: MessageSchema = {
   logout: 'Выйти',
   logoutConfirm: 'Вы уверены, что хотите выйти?',
   loginSelectHint: 'Пожалуйста, выберите аккаунт, с которым вы хотите войти:',
+  editLinkRedirectTemplate: 'Шаблон перенаправления',
 }
 
 export default ru

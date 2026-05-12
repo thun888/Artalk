@@ -95,6 +95,7 @@ export const ja: MessageSchema = {
   logout: 'ログアウト',
   logoutConfirm: 'ログアウトしてもよろしいですか？',
   loginSelectHint: 'ログインするアカウントを選択してください：',
+  editLinkRedirectTemplate: 'リダイレクトテンプレート',
 }
 
 export default ja

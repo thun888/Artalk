@@ -13,8 +13,9 @@ import (
 )
 
 type ParamsSiteUpdate struct {
-	Name string   `json:"name" validate:"required"` // Updated site name
-	Urls []string `json:"urls" validate:"required"` // Updated site urls
+	Name                         string   `json:"name" validate:"required"` // Updated site name
+	Urls                         []string `json:"urls" validate:"required"` // Updated site urls
+	ExternalLinkRedirectTemplate string   `json:"external_link_redirect_template"` // External link redirect template
 }
 
 type ResponseSiteUpdate struct {
@@ -87,6 +88,7 @@ func SiteUpdate(app *core.App, router fiber.Router) {
 		// 修改 site
 		site.Name = p.Name
 		site.Urls = strings.Join(p.Urls, ",")
+		site.ExternalLinkRedirectTemplate = p.ExternalLinkRedirectTemplate
 
 		err := app.Dao().UpdateSite(&site)
 		if err != nil {

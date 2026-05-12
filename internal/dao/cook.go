@@ -163,11 +163,12 @@ func (dao *Dao) CookSite(s *entity.Site) entity.CookedSite {
 	}
 
 	return entity.CookedSite{
-		ID:       s.ID,
-		Name:     s.Name,
-		Urls:     splitUrls,
-		UrlsRaw:  s.Urls,
-		FirstUrl: firstUrl,
+		ID:                           s.ID,
+		Name:                         s.Name,
+		Urls:                         splitUrls,
+		UrlsRaw:                      s.Urls,
+		FirstUrl:                     firstUrl,
+		ExternalLinkRedirectTemplate: s.ExternalLinkRedirectTemplate,
 	}
 }
 

@@ -1,4 +1,5 @@
 import * as Utils from '../../lib/utils'
+import { applyRedirectTemplate } from '../../lib/link-redirect'
 import type Render from '../render'
 import $t from '@/i18n'
 
@@ -24,7 +25,9 @@ function renderNick(r: Render) {
       '<a target="_blank" rel="noreferrer noopener nofollow ugc"></a>',
     )
     $nickA.innerText = r.data.nick
-    $nickA.href = Utils.isValidURL(r.data.link) ? r.data.link : `https://${r.data.link}`
+    $nickA.href = applyRedirectTemplate(
+      Utils.isValidURL(r.data.link) ? r.data.link : `https://${r.data.link}`,
+    )
     r.$headerNick.append($nickA)
   } else {
     r.$headerNick.innerText = r.data.nick

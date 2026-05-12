@@ -12,8 +12,9 @@ import (
 )
 
 type ParamsSiteCreate struct {
-	Name string   `json:"name" validate:"required"` // The site name
-	Urls []string `json:"urls" validate:"required"` // The site urls
+	Name                         string   `json:"name" validate:"required"` // The site name
+	Urls                         []string `json:"urls" validate:"required"` // The site urls
+	ExternalLinkRedirectTemplate string   `json:"external_link_redirect_template"` // External link redirect template
 }
 
 type ResponseSiteCreate struct {
@@ -55,6 +56,7 @@ func SiteCreate(app *core.App, router fiber.Router) {
 		site := entity.Site{}
 		site.Name = p.Name
 		site.Urls = strings.Join(p.Urls, ",")
+		site.ExternalLinkRedirectTemplate = p.ExternalLinkRedirectTemplate
 		err := app.Dao().CreateSite(&site)
 		if err != nil {
 			return common.RespError(c, 500, i18n.T("{{name}} creation failed", Map{"name": i18n.T("Site")}))
