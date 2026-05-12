@@ -94,6 +94,7 @@ export const en = {
   logout: 'Logout',
   logoutConfirm: 'Are you sure you want to log out?',
   loginSelectHint: 'Please select the account you wish to log into:',
+  editLinkRedirectTemplate: 'Redirect Template',
 }
 
 export default en

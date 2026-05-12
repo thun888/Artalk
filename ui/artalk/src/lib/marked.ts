@@ -4,6 +4,7 @@ import type { MarkedOptions } from 'marked'
 import { sanitize } from './sanitizer'
 import { renderCode } from './highlight'
 import { getRenderer } from './marked-renderer'
+import { applyRedirectTemplate } from './link-redirect'
 import type { Config } from '@/types'
 
 type Replacer = (raw: string) => string
@@ -82,7 +83,8 @@ function simpleMarked(src: string) {
       .replace(/!\[(.*?)\]\((.*?)\)/g, (_, alt, imgSrc) => `<img src="${imgSrc}" alt="${alt}" />`)
       .replace(
         /\[(.*?)\]\((.*?)\)/g,
-        (_, text, link) => `<a href="${link}" target="_blank">${text}</a>`,
+        (_, text, link) =>
+          `<a href="${applyRedirectTemplate(link)}" target="_blank" rel="noreferrer noopener nofollow ugc">${text}</a>`,
       )
       .replace(/\n/g, '<br>')
   )

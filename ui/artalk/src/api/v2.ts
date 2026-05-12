@@ -89,6 +89,7 @@ export interface EntityCookedPage {
 }
 
 export interface EntityCookedSite {
+  external_link_redirect_template?: string
   first_url: string
   id: number
   name: string
@@ -229,6 +230,8 @@ export interface HandlerParamsSettingApply {
 }
 
 export interface HandlerParamsSiteCreate {
+  /** External link redirect template */
+  external_link_redirect_template?: string
   /** The site name */
   name: string
   /** The site urls */
@@ -236,6 +239,8 @@ export interface HandlerParamsSiteCreate {
 }
 
 export interface HandlerParamsSiteUpdate {
+  /** External link redirect template */
+  external_link_redirect_template?: string
   /** Updated site name */
   name: string
   /** Updated site urls */
@@ -408,6 +413,7 @@ export interface HandlerResponseCommentList {
   count: number
   page?: EntityCookedPage
   roots_count: number
+  site_external_link_redirect_tpl?: string
 }
 
 export interface HandlerResponseCommentUpdate {

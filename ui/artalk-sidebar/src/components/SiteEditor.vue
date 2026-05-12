@@ -38,6 +38,10 @@ function editURL() {
   editFieldKey.value = 'urls'
 }
 
+function editRedirectTemplate() {
+  editFieldKey.value = 'external_link_redirect_template'
+}
+
 function del() {
   const del = async () => {
     isLoading.value = true
@@ -116,6 +120,9 @@ function onFiledEditorNo() {
           {{ t('rename') }}
         </div>
         <div class="atk-item atk-edit-url-btn" @click="editURL()">{{ t('edit') }} URL</div>
+        <div class="atk-item atk-edit-tpl-btn" @click="editRedirectTemplate()">
+          {{ t('editLinkRedirectTemplate') }}
+        </div>
         <!--<div class="atk-item atk-export-btn">Export</div>
         <div class="atk-item atk-import-btn">Import</div>-->
       </div>

@@ -1,4 +1,5 @@
 import * as Utils from '../../lib/utils'
+import { applyRedirectTemplate } from '../../lib/link-redirect'
 import type Render from '../render'
 
 /**
@@ -15,7 +16,9 @@ export default function renderAvatar(r: Render) {
     const $avatarA = Utils.createElement<HTMLLinkElement>(
       '<a target="_blank" rel="noreferrer noopener nofollow ugc"></a>',
     )
-    $avatarA.href = Utils.isValidURL(r.data.link) ? r.data.link : `https://${r.data.link}`
+    $avatarA.href = applyRedirectTemplate(
+      Utils.isValidURL(r.data.link) ? r.data.link : `https://${r.data.link}`,
+    )
     $avatarA.append($avatarImg)
     $avatar.append($avatarA)
   } else {

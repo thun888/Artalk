@@ -6,8 +6,9 @@ import (
 
 type Site struct {
 	gorm.Model
-	Name string `gorm:"uniqueIndex;size:255"`
-	Urls string
+	Name                         string `gorm:"uniqueIndex;size:255"`
+	Urls                         string
+	ExternalLinkRedirectTemplate string
 }
 
 func (s Site) IsEmpty() bool {

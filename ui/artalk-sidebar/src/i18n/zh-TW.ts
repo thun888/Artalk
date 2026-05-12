@@ -92,6 +92,7 @@ export const zhTW: MessageSchema = {
   logout: '登出',
   logoutConfirm: '確定要登出嗎？',
   loginSelectHint: '請選擇您要登入的帳號：',
+  editLinkRedirectTemplate: '外鏈跳轉模板',
 }
 
 export default zhTW

@@ -33,10 +33,11 @@ type ParamsCommentList struct {
 }
 
 type ResponseCommentList struct {
-	Comments   []entity.CookedComment `json:"comments"`
-	Count      int64                  `json:"count"`
-	RootsCount int64                  `json:"roots_count"`
-	Page       *entity.CookedPage     `json:"page,omitempty"`
+	Comments                    []entity.CookedComment `json:"comments"`
+	Count                       int64                  `json:"count"`
+	RootsCount                  int64                  `json:"roots_count"`
+	Page                        *entity.CookedPage     `json:"page,omitempty"`
+	SiteExternalLinkRedirectTpl string                 `json:"site_external_link_redirect_tpl,omitempty"`
 }
 
 // @Id           GetComments
@@ -127,6 +128,14 @@ func CommentList(app *core.App, router fiber.Router) {
 		// If query scope is page, extra query page data
 		if scope == cog.ScopePage {
 			resp.Page = findPageData(app.Dao(), p.PageKey, p.SiteName)
+		}
+
+		// Include site's external link redirect template
+		if p.SiteName != "" {
+			site := app.Dao().FindSite(p.SiteName)
+			if !site.IsEmpty() {
+				resp.SiteExternalLinkRedirectTpl = site.ExternalLinkRedirectTemplate
+			}
 		}
 
 		return common.RespData(c, resp)

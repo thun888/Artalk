@@ -24,6 +24,9 @@ export class DataManager implements IDataManager {
   /** Page data */
   private page?: PageData
 
+  /** Site external link redirect template */
+  private siteExternalLinkRedirectTemplate: string = ''
+
   constructor(protected events: EventManager) {}
 
   getLoading() {
@@ -120,5 +123,16 @@ export class DataManager implements IDataManager {
     this.page = pageData
 
     this.events.trigger('page-loaded', pageData)
+  }
+
+  // -------------------------------------------------------------------
+  //  Site External Link Redirect Template
+  // -------------------------------------------------------------------
+  getSiteExternalLinkRedirectTemplate() {
+    return this.siteExternalLinkRedirectTemplate
+  }
+
+  setSiteExternalLinkRedirectTemplate(tpl: string) {
+    this.siteExternalLinkRedirectTemplate = tpl
   }
 }
