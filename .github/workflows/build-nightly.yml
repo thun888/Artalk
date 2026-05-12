@@ -14,7 +14,7 @@ on:
 env:
   DIST_DIR: /tmp/builds
   DIGEST_DIR: /tmp/digests
-  DOCKER_IMG: artalk/artalk-go
+  DOCKER_IMG: thun888/artalk-go
   DOCKER_BUILD_ARGS: |-
     SKIP_UI_BUILD=true
 
@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          ref: myself
 
       - name: Check should run
         id: check
