@@ -107,7 +107,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 | **ATK_ADMIN_NOTIFY_SLACK_ENABLED** | `false` | 启用 | admin_notify.slack.enabled (Multi-Push > Slack > Enabled) |
 | **ATK_ADMIN_NOTIFY_SLACK_OAUTH_TOKEN** | `""` | OauthToken | admin_notify.slack.oauth_token (Multi-Push > Slack > OauthToken) |
 | **ATK_ADMIN_NOTIFY_SLACK_RECEIVERS** | `[CHANNEL_ID]` | Receivers | admin_notify.slack.receivers (Multi-Push > Slack > Receivers) |
-| **ATK_ADMIN_NOTIFY_TELEGRAM_API_ENDPOINT** | `""` | 自定义 Telegram Bot API 端点 (格式: https://tg.example.com/bot%s/%s) | admin_notify.telegram.api_endpoint (Multi-Push > Telegram > 自定义 Telegram Bot API 端点) |
+| **ATK_ADMIN_NOTIFY_TELEGRAM_API_ENDPOINT** | `""` | 自定义 Telegram Bot API 端点 (格式: https://tg.example.com) | admin_notify.telegram.api_endpoint (Multi-Push > Telegram > 自定义 Telegram Bot API 端点) |
 | **ATK_ADMIN_NOTIFY_TELEGRAM_API_TOKEN** | `""` | ApiToken | admin_notify.telegram.api_token (Multi-Push > Telegram > ApiToken) |
 | **ATK_ADMIN_NOTIFY_TELEGRAM_ENABLED** | `false` | 启用 | admin_notify.telegram.enabled (Multi-Push > Telegram > Enabled) |
 | **ATK_ADMIN_NOTIFY_TELEGRAM_RECEIVERS** | `[7777777]` | Receivers | admin_notify.telegram.receivers (Multi-Push > Telegram > Receivers) |

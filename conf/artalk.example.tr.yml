@@ -143,6 +143,26 @@ moderator:
       - ./data/keywords_1.txt
     file_sep: "\n"
     replace_to: x
+  # AI İçerik Moderasyonu
+  # (AI kullanarak spam yorumları tespit eder, OpenAI ve Anthropic uç noktalarını destekler)
+  ai:
+    enabled: false
+    # Uç noktası türü ["openai", "anthropic"]
+    type: openai
+    # Uç noktası URL'si (tam URL, "https://api.openai.com/v1/chat/completions" gibi)
+    endpoint: "https://api.openai.com/v1/chat/completions"
+    # AI API Anahtarı
+    api_key: ""
+    # AI model adı
+    model: "abcd"
+    # Sistem istemi (Modelin rolünü tanımlar. Açık spam tanımları, değerlendirme kriterleri ve sonucu JSON formatında döndürmesi önerilir)
+    system_prompt: "Bir spam içerik dedektörüsünüz. Verilen yorumun spam veya reklam olup olmadığını belirleyin. Spam ise {\"result\": true, \"reason\": \"kısa açıklama\"}, değilse {\"result\": false, \"reason\": \"\"} JSON nesnesi döndürün."
+    # Kullanıcı istemi (Kullanılabilir yer tutucular: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}})
+    user_prompt: "{{content}}"
+    # Düşünme modu
+    thinking: false
+    # Maksimum belirteç
+    max_tokens: 1024
 
 # Doğrulama (Captcha)
 captcha:
@@ -150,7 +170,7 @@ captcha:
   enabled: true
   # Her zaman doğrulama gerekli
   always: false
-  # Doğrulama türü ["image", "turnstile", "recaptcha", "hcaptcha", "geetest"]
+  # Doğrulama türü ["image", "turnstile", "recaptcha", "hcaptcha", "geetest", "capjs"]
   captcha_type: image
   # İşlem sınırı
   # (doğrulamayı etkinleştirmek için gereken işlem sayısı)
@@ -175,6 +195,11 @@ captcha:
   geetest:
     captcha_id: ""
     captcha_key: ""
+  # Cap (https://capjs.js.org/)
+  capjs:
+    api_endpoint: ""
+    key_id: ""
+    secret_key: ""
 
 # Yükleme
 img_upload:
@@ -249,6 +274,7 @@ admin_notify:
   telegram:
     enabled: false
     api_token: ""
+    api_endpoint: "" # Özel Telegram Bot API uç noktası (örn: https://tg.example.com)
     receivers:
       - 7777777
   # Bark
