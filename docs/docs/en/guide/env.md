@@ -66,14 +66,14 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 <div class="env-table">
 <!-- env-variables -->
 
-## 通用配置
+## General
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_APP_KEY** | `""` | App Key (for generation of JWT) | app_key (App Key) |
 | **ATK_DEBUG** | `false` | Debug mode | debug (Debug mode) |
 | **ATK_HOST** | `"0.0.0.0"` | Listen host | host (Listen host) |
-| **ATK_LOCALE** | `"en"` | Language (follow Unicode BCP 47) (可选：`["en", "zh-CN", "zh-TW", "ja", "fr", "ko", "ru"]`) | locale (Language) |
+| **ATK_LOCALE** | `"en"` | Language (follow Unicode BCP 47) (可选：`["en", "zh-CN", "zh-TW", "ja", "fr", "ko", "ru", "tr"]`) | locale (Language) |
 | **ATK_LOGIN_TIMEOUT** | `259200` | Login timeout (in seconds) | login_timeout (Login timeout) |
 | **ATK_PORT** | `23366` | Listen port | port (Listen port) |
 | **ATK_SITE_DEFAULT** | `"Default Site"` | Default site name (create when app is first launched) | site_default (Default site name) |
@@ -84,7 +84,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Multi-Push
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_ADMIN_NOTIFY_BARK_ENABLED** | `false` | 启用 | admin_notify.bark.enabled (Multi-Push > Bark > Enabled) |
 | **ATK_ADMIN_NOTIFY_BARK_SERVER** | `"http://day.app/xxxxxxx/"` | Server | admin_notify.bark.server (Multi-Push > Bark > Server) |
@@ -117,7 +117,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Social Login
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_AUTH_ANONYMOUS** | `false` | Allow anonymous commenting (Allow skipping verification, only fill in an anonymous nickname and email) | auth.anonymous (Social Login > Allow anonymous commenting) |
 | **ATK_AUTH_APPLE_CLIENT_ID** | `""` | ClientId | auth.apple.client_id (Social Login > Apple > ClientId) |
@@ -165,6 +165,8 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 | **ATK_AUTH_SLACK_CLIENT_ID** | `""` | ClientId | auth.slack.client_id (Social Login > Slack > ClientId) |
 | **ATK_AUTH_SLACK_CLIENT_SECRET** | `""` | ClientSecret | auth.slack.client_secret (Social Login > Slack > ClientSecret) |
 | **ATK_AUTH_SLACK_ENABLED** | `false` | 启用 | auth.slack.enabled (Social Login > Slack > Enabled) |
+| **ATK_AUTH_SSO_ENABLED** | `false` | Enable SSO token exchange | auth.sso.enabled (Social Login > SSO > Enable SSO token exchange) |
+| **ATK_AUTH_SSO_ISSUER** | `""` | OIDC issuer URL (e.g. "tenant.auth0.com" or "https://tenant.auth0.com") | auth.sso.issuer (Social Login > SSO > OIDC issuer URL) |
 | **ATK_AUTH_STEAM_API_KEY** | `""` | ApiKey | auth.steam.api_key (Social Login > Steam > ApiKey) |
 | **ATK_AUTH_STEAM_ENABLED** | `false` | 启用 | auth.steam.enabled (Social Login > Steam > Enabled) |
 | **ATK_AUTH_TIKTOK_CLIENT_ID** | `""` | ClientId | auth.tiktok.client_id (Social Login > Tiktok > ClientId) |
@@ -180,7 +182,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Cache
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_CACHE_ENABLED** | `false` | Enable cache | cache.enabled (Cache > Enable cache) |
 | **ATK_CACHE_EXPIRES** | `30` | Cache expiration time (in minutes) | cache.expires (Cache > Cache expiration time) |
@@ -195,7 +197,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Captcha
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_CAPTCHA_ACTION_LIMIT** | `3` | Action limit (the number of actions required to activate captcha) | captcha.action_limit (Captcha > Action limit) |
 | **ATK_CAPTCHA_ACTION_RESET** | `60` | Reset Timeout (timeout to reset action counter. unit: s, set to -1 to disable) | captcha.action_reset (Captcha > Reset Timeout) |
@@ -217,7 +219,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Database
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_DB_CHARSET** | `"utf8mb4"` | Database charset | db.charset (Database > Database charset) |
 | **ATK_DB_FILE** | `"./data/artalk.db"` | Database file (only for SQLite) | db.file (Database > Database file) |
@@ -234,7 +236,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Email
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_EMAIL_ALI_DM_ACCESS_KEY_ID** | `""` | AccessKeyId | email.ali_dm.access_key_id (Email > Aliyun mail push > AccessKeyId) |
 | **ATK_EMAIL_ALI_DM_ACCESS_KEY_SECRET** | `""` | AccessKeySecret | email.ali_dm.access_key_secret (Email > Aliyun mail push > AccessKeySecret) |
@@ -253,7 +255,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## UI Settings
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_FRONTEND_DARKMODE** | `"inherit"` | Dark mode (可选：`["inherit", "auto"]`) | frontend.darkMode (UI Settings > Dark mode) |
 | **ATK_FRONTEND_EDITORTRAVEL** | `true` | Movable comment box | frontend.editorTravel (UI Settings > Movable comment box) |
@@ -285,7 +287,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Web server
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_HTTP_BODY_LIMIT** | `100` | Body size limit (unit: MB) | http.body_limit (Web server > Body size limit) |
 | **ATK_HTTP_PROXY_HEADER** | `""` | Proxy Header (fill `X-Forwarded-For` to get user real IP if behind a trusted reverse proxy or CDN) | http.proxy_header (Web server > Proxy Header) |
@@ -293,7 +295,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Upload
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_IMG_UPLOAD_ENABLED** | `true` | Enable image upload | img_upload.enabled (Upload > Enable image upload) |
 | **ATK_IMG_UPLOAD_MAX_SIZE** | `5` | Image size limit (unit: MB) | img_upload.max_size (Upload > Image size limit) |
@@ -306,7 +308,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Logging
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_LOG_ENABLED** | `true` | Enable logging | log.enabled (Logging > Enable logging) |
 | **ATK_LOG_FILENAME** | `"./data/artalk.log"` | Log file path | log.filename (Logging > Log file path) |
@@ -314,7 +316,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## Moderator
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_MODERATOR_AI_API_KEY** | `""` | AI API Key | moderator.ai.api_key (Moderator > AI Content Moderation > AI API Key) |
 | **ATK_MODERATOR_AI_ENABLED** | `false` | 启用 | moderator.ai.enabled (Moderator > AI Content Moderation > Enabled) |
@@ -345,7 +347,7 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 
 ## SSL
 
-| 环境变量 | 默认值 | 描述 | 路径 |
+| Env | Default | Desc | Path |
 | --- | --- | --- | --- |
 | **ATK_SSL_CERT_PATH** | `""` | Certificate file path (e.g. "/etc/letsencrypt/live/example.com/fullchain.pem") | ssl.cert_path (SSL > Certificate file path) |
 | **ATK_SSL_ENABLED** | `false` | Enable SSL | ssl.enabled (SSL > Enable SSL) |

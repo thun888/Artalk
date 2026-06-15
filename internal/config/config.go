@@ -73,6 +73,10 @@ type DBConf struct {
 	Charset     string `koanf:"charset" json:"charset"`
 	SSL         bool   `koanf:"ssl" json:"ssl"`
 	PrepareStmt *bool  `koanf:"prepare_stmt" json:"prepare_stmt"`
+
+	ServerCaPath   string `koanf:"server_ca_path" json:"server_ca_path"`     // /path/to/server-ca.pem
+	ClientCertPath string `koanf:"client_cert_path" json:"client_cert_path"` // /path/to/client-cert.pem
+	ClientKeyPath  string `koanf:"client_key_path" json:"client_key_path"`   // /path/to/client-key.pem
 }
 
 type CacheConf struct {
@@ -477,4 +481,18 @@ type AuthConf struct {
 		ClientSecret string `koanf:"client_secret" json:"client_secret"`
 		Domain       string `koanf:"domain" json:"domain"`
 	} `koanf:"auth0" json:"auth0"`
+
+	// Token exchange — accept an access token from an external OIDC IdP
+	// (verified via that IdP's /userinfo) and issue an Artalk JWT for the
+	// matching user. Lets a surrounding application that already runs OIDC
+	// (e.g. an Auth0 SPA) drive Artalk sign-in without showing Artalk's
+	// own popup login.
+	SSO AuthSSOConf `koanf:"sso" json:"sso"`
+}
+
+type AuthSSOConf struct {
+	Enabled bool   `koanf:"enabled" json:"enabled"`
+	// Issuer is the OIDC issuer URL — e.g. "tenant.auth0.com" or
+	// "https://tenant.auth0.com". /userinfo is called against this host.
+	Issuer string `koanf:"issuer" json:"issuer"`
 }
