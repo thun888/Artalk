@@ -51,39 +51,12 @@ export function iframeBody(checker: CheckerCtx) {
   // 监听 iframe 内的 solve 事件（postMessage）
   const onMessage = (e: MessageEvent) => {
     if (e.data?.type !== 'captcha-solved') return
-    stop = true
     window.removeEventListener('message', onMessage)
     checker.triggerSuccess()
   }
   window.addEventListener('message', onMessage)
 
-  // 轮询状态（fallback）
-  let stop = false // 打断
-  const sleep = (ms: number) =>
-    new Promise((resolve) => {
-      window.setTimeout(() => {
-        resolve(null)
-      }, ms)
-    })
-  ;(async function queryStatus() {
-    await sleep(1000)
-    if (stop) return
-    let isPass: boolean
-    try {
-      const resp = await checker.getApi().captcha.getCaptchaStatus()
-      isPass = resp.data.is_pass
-    } catch {
-      isPass = false
-    }
-    if (isPass) {
-      checker.triggerSuccess()
-    } else {
-      queryStatus()
-    }
-  })()
-
   $closeBtn.onclick = () => {
-    stop = true
     window.removeEventListener('message', onMessage)
     checker.cancel()
   }
