@@ -36,7 +36,9 @@
               body: JSON.stringify({ value: token }),
             })
               .then(function (res) {
-                if (!res.ok) {
+                if (res.ok) {
+                  window.parent.postMessage({ type: 'captcha-solved' }, '*')
+                } else {
                   res.json().then((json) => {
                     alert('验证失败：' + res.status + ' ' + json.msg || '')
                   })
