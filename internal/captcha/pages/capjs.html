@@ -24,6 +24,11 @@
   <body>
     <cap-widget
       data-cap-api-endpoint="{{.api_endpoint}}/{{.key_id}}/"
+      data-cap-i18n-initial-state="点击验证ヾ(•ω•`)o"
+      data-cap-i18n-verifying-label="验证中..."
+      data-cap-i18n-solved-label="验证通过，等待后端处理..."
+      data-cap-i18n-error-label="发生错误，请重试 ＞﹏＜"
+      data-cap-i18n-required-label="请验证您是人类"
     ></cap-widget>
     <script>
       const capWidget = document.querySelector('cap-widget');
