@@ -48,7 +48,16 @@ export function iframeBody(checker: CheckerCtx) {
 
   checker.hideInteractInput()
 
-  // 轮询状态
+  // 监听 iframe 内的 solve 事件（postMessage）
+  const onMessage = (e: MessageEvent) => {
+    if (e.data?.type !== 'captcha-solved') return
+    stop = true
+    window.removeEventListener('message', onMessage)
+    checker.triggerSuccess()
+  }
+  window.addEventListener('message', onMessage)
+
+  // 轮询状态（fallback）
   let stop = false // 打断
   const sleep = (ms: number) =>
     new Promise((resolve) => {
@@ -75,6 +84,7 @@ export function iframeBody(checker: CheckerCtx) {
 
   $closeBtn.onclick = () => {
     stop = true
+    window.removeEventListener('message', onMessage)
     checker.cancel()
   }
 
