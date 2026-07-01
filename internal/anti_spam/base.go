@@ -135,6 +135,7 @@ func (as AntiSpam) getEnabledCheckers() []Checker {
 			UserPrompt:   aiConf.UserPrompt,
 			Thinking:     aiConf.Thinking,
 			MaxTokens:    aiConf.MaxTokens,
+			JsonOutput:   aiConf.JsonOutput,
 		}))
 	}
 

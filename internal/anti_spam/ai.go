@@ -39,6 +39,7 @@ type AICheckerConf struct {
 	UserPrompt   string // user message template (supports placeholders)
 	Thinking     bool
 	MaxTokens    int
+	JsonOutput   bool // force JSON output (OpenAI response_format / Anthropic output type)
 }
 
 type AIChecker struct {
@@ -196,7 +197,13 @@ type openAIRequest struct {
 	//nolint:tagliatelle
 	MaxTokens int `json:"max_tokens,omitempty"`
 	//nolint:tagliatelle
-	Reasoning *openAIReasoning `json:"reasoning,omitempty"`
+	Reasoning       *openAIReasoning     `json:"reasoning,omitempty"`
+	//nolint:tagliatelle
+	ResponseFormat *openAIResponseFormat `json:"response_format,omitempty"`
+}
+
+type openAIResponseFormat struct {
+	Type string `json:"type"`
 }
 
 type openAIReasoning struct {
@@ -225,6 +232,10 @@ func (c *AIChecker) callOpenAI(systemMsg, userMsg string) (string, error) {
 
 	if c.conf.Thinking {
 		reqBody.Reasoning = &openAIReasoning{Effort: "medium"}
+	}
+
+	if c.conf.JsonOutput {
+		reqBody.ResponseFormat = &openAIResponseFormat{Type: "json_object"}
 	}
 
 	body, err := json.Marshal(reqBody)
@@ -308,6 +319,9 @@ func (c *AIChecker) callAnthropic(systemMsg, userMsg string) (string, error) {
 			{Role: "user", Content: userMsg},
 		},
 	}
+
+	// Anthropic does not have a native response_format parameter;
+	// JSON output is achieved via the system prompt instruction.
 
 	if c.conf.Thinking {
 		reqBody.Thinking = &anthropicThinking{

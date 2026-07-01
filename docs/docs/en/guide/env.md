@@ -323,12 +323,13 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 | --- | --- | --- | --- |
 | **ATK_MODERATOR_AI_API_KEY** | `""` | AI API Key | moderator.ai.api_key (Moderator > AI Content Moderation > AI API Key) |
 | **ATK_MODERATOR_AI_ENABLED** | `false` | 启用 | moderator.ai.enabled (Moderator > AI Content Moderation > Enabled) |
-| **ATK_MODERATOR_AI_ENDPOINT** | `"https://api.openai.com/v1/chat/completions"` | Endpoint URL (full) | moderator.ai.endpoint (Moderator > AI Content Moderation > Endpoint URL) |
+| **ATK_MODERATOR_AI_ENDPOINT** | `"https://api.openai.com/v1/chat/completions"` | Endpoint URL (full URL, like "https://api.openai.com/v1/chat/completions") | moderator.ai.endpoint (Moderator > AI Content Moderation > Endpoint URL) |
+| **ATK_MODERATOR_AI_JSON_OUTPUT** | `false` | JSON Output (automatically return structured JSON, only for OpenAI-compatible endpoints) | moderator.ai.json_output (Moderator > AI Content Moderation > JSON Output) |
 | **ATK_MODERATOR_AI_MAX_TOKENS** | `1024` | Max tokens | moderator.ai.max_tokens (Moderator > AI Content Moderation > Max tokens) |
 | **ATK_MODERATOR_AI_MODEL** | `"abcd"` | AI model name | moderator.ai.model (Moderator > AI Content Moderation > AI model name) |
 | **ATK_MODERATOR_AI_SYSTEM_PROMPT** | `"You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."` | System prompt (Defines the model's role. It's recommended to include clear spam definitions, judging criteria, and return the result in JSON format) | moderator.ai.system_prompt (Moderator > AI Content Moderation > System prompt) |
 | **ATK_MODERATOR_AI_THINKING** | `false` | Thinking mode | moderator.ai.thinking (Moderator > AI Content Moderation > Thinking mode) |
-| **ATK_MODERATOR_AI_TYPE** | `"openai"` | Endpoint type ("openai" or "anthropic") | moderator.ai.type (Moderator > AI Content Moderation > Endpoint type) |
+| **ATK_MODERATOR_AI_TYPE** | `"openai"` | Endpoint type (可选：`["openai", "anthropic"]`) | moderator.ai.type (Moderator > AI Content Moderation > Endpoint type) |
 | **ATK_MODERATOR_AI_USER_PROMPT** | `"{{content}}"` | User prompt (Available placeholders: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}}) | moderator.ai.user_prompt (Moderator > AI Content Moderation > User prompt) |
 | **ATK_MODERATOR_AKISMET_KEY** | `""` | Akismet Key (Akismet anti-spam service, https://akismet.com) | moderator.akismet_key (Moderator > Akismet Key) |
 | **ATK_MODERATOR_ALIYUN_ACCESS_KEY_ID** | `""` | AccessKeyId | moderator.aliyun.access_key_id (Moderator > Aliyun Content Security > AccessKeyId) |

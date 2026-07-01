@@ -333,12 +333,13 @@ ATK_TRUSTED_DOMAINS_0="https://a.com"
 | --- | --- | --- | --- |
 | **ATK_MODERATOR_AI_API_KEY** | `""` | AI API Key | moderator.ai.api_key (评论审核 > AI 内容审核 > AI API Key) |
 | **ATK_MODERATOR_AI_ENABLED** | `false` | 启用 | moderator.ai.enabled (评论审核 > AI 内容审核 > Enabled) |
-| **ATK_MODERATOR_AI_ENDPOINT** | `"https://api.openai.com/v1/chat/completions"` | 端点URL (完整) | moderator.ai.endpoint (评论审核 > AI 内容审核 > 端点URL) |
+| **ATK_MODERATOR_AI_ENDPOINT** | `"https://api.openai.com/v1/chat/completions"` | 端点URL (完整链接，示例: "https://api.openai.com/v1/chat/completions") | moderator.ai.endpoint (评论审核 > AI 内容审核 > 端点URL) |
+| **ATK_MODERATOR_AI_JSON_OUTPUT** | `false` | JSON 输出（自动返回结构化 JSON，仅对 OpenAI 兼容的端点生效） | moderator.ai.json_output (评论审核 > AI 内容审核 > JSON 输出（自动返回结构化 JSON，仅对 OpenAI 兼容的端点生效）) |
 | **ATK_MODERATOR_AI_MAX_TOKENS** | `1024` | 最大 tokens 数量 | moderator.ai.max_tokens (评论审核 > AI 内容审核 > 最大 tokens 数量) |
 | **ATK_MODERATOR_AI_MODEL** | `"abcd"` | AI 模型名称 | moderator.ai.model (评论审核 > AI 内容审核 > AI 模型名称) |
 | **ATK_MODERATOR_AI_SYSTEM_PROMPT** | `"You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."` | 系统提示词 (模型的角色设定，建议包含明确的垃圾评论定义和判断标准，并以 JSON 格式返回结果) | moderator.ai.system_prompt (评论审核 > AI 内容审核 > 系统提示词) |
 | **ATK_MODERATOR_AI_THINKING** | `false` | 思考模式 | moderator.ai.thinking (评论审核 > AI 内容审核 > 思考模式) |
-| **ATK_MODERATOR_AI_TYPE** | `"openai"` | 端点类型 ("openai" 或 "anthropic") | moderator.ai.type (评论审核 > AI 内容审核 > 端点类型) |
+| **ATK_MODERATOR_AI_TYPE** | `"openai"` | 端点类型 (可选：`["openai", "anthropic"]`) | moderator.ai.type (评论审核 > AI 内容审核 > 端点类型) |
 | **ATK_MODERATOR_AI_USER_PROMPT** | `"{{content}}"` | 用户提示词 (可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}}) | moderator.ai.user_prompt (评论审核 > AI 内容审核 > 用户提示词) |
 | **ATK_MODERATOR_AKISMET_KEY** | `""` | Akismet Key (Akismet 反垃圾服务，https://akismet.com) | moderator.akismet_key (评论审核 > Akismet Key) |
 | **ATK_MODERATOR_ALIYUN_ACCESS_KEY_ID** | `""` | AccessKeyId | moderator.aliyun.access_key_id (评论审核 > 阿里云内容安全 > AccessKeyId) |

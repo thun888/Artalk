@@ -161,6 +161,8 @@ moderator:
     user_prompt: "{{content}}"
     # Thinking mode
     thinking: false
+    # JSON Output (automatically return structured JSON, only for OpenAI-compatible endpoints)
+    json_output: false
     # Max tokens
     max_tokens: 1024
 
