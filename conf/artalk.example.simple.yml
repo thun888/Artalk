@@ -71,6 +71,7 @@ moderator:
     system_prompt: "You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."
     user_prompt: "{{content}}"
     thinking: false
+    json_output: false
     max_tokens: 1024
 captcha:
   enabled: true

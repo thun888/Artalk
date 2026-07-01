@@ -7,7 +7,8 @@ import (
 )
 
 type ResponseCaptchaStatus struct {
-	IsPass bool `json:"is_pass"`
+	IsPass bool   `json:"is_pass"`
+	IP     string `json:"ip,omitempty"`
 }
 
 // @Id           GetCaptchaStatus
@@ -24,8 +25,13 @@ func CaptchaStatus(app *core.App, router fiber.Router) {
 			return err
 		}
 
-		return common.RespData(c, ResponseCaptchaStatus{
+		resp := ResponseCaptchaStatus{
 			IsPass: limiter.IsPass(c.IP()),
-		})
+		}
+		if app.Conf().Debug {
+			resp.IP = c.IP()
+		}
+
+		return common.RespData(c, resp)
 	})
 }

@@ -163,6 +163,8 @@ moderator:
     user_prompt: "{{content}}"
     # 思考模式
     thinking: false
+    # JSON 输出(自动返回结构化 JSON，仅对 OpenAI 兼容的端点生效)
+    json_output: false
     # 最大 tokens 数量
     max_tokens: 1024
 # 验证码

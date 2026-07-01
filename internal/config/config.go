@@ -158,6 +158,7 @@ type AIAntispamConf struct {
 	UserPrompt   string `koanf:"user_prompt" json:"user_prompt"`     // 用户提示词（支持占位符）
 	Thinking     bool   `koanf:"thinking" json:"thinking"`           // 是否启用思考模式
 	MaxTokens    int    `koanf:"max_tokens" json:"max_tokens"`       // 最大输出 token 数
+	JsonOutput   bool   `koanf:"json_output" json:"json_output"`     // 强制模型以 JSON 格式输出
 }
 
 // 关键词词库过滤
