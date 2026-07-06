@@ -10,7 +10,9 @@ export const Copyright: ArtalkPlugin = (ctx) => {
 
     $copyright.innerHTML =
       `Powered By <a href="https://artalk.js.org" ` +
-      `target="_blank" title="Artalk v${ARTALK_VERSION}">` +
-      `Artalk</a>`
+      `target="_blank" title="Artalk v${ARTALK_VERSION}">Artalk</a>` +
+      `<br>` +
+      `Customized By <a href="https://www.hzchu.top" ` +
+      `target="_blank" title="Catch you!">Thun888</a>`
   })
 }
