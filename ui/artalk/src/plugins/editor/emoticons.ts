@@ -238,8 +238,12 @@ export default class Emoticons extends EditorPlugin {
           $item.setAttribute('title', item.key)
 
         if (grp.type === 'image') {
+          let resolvedVal = item.val
+          if (grp.basePrefix) resolvedVal = grp.basePrefix + resolvedVal
+          if (grp.baseSuffix) resolvedVal = resolvedVal + grp.baseSuffix
+
           const imgEl = document.createElement('img')
-          imgEl.src = item.val
+          imgEl.src = resolvedVal
           imgEl.alt = item.key
           imgEl.loading = 'lazy'
           $item.append(imgEl)
