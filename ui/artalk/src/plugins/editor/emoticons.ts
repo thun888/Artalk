@@ -238,12 +238,8 @@ export default class Emoticons extends EditorPlugin {
           $item.setAttribute('title', item.key)
 
         if (grp.type === 'image') {
-          let resolvedVal = item.val
-          if (grp.basePrefix) resolvedVal = grp.basePrefix + resolvedVal
-          if (grp.baseSuffix) resolvedVal = resolvedVal + grp.baseSuffix
-
           const imgEl = document.createElement('img')
-          imgEl.src = resolvedVal
+          imgEl.src = this.resolveImageVal(grp, item.val)
           imgEl.alt = item.key
           imgEl.loading = 'lazy'
           $item.append(imgEl)
@@ -302,6 +298,14 @@ export default class Emoticons extends EditorPlugin {
     this.editor.plugWrapEl.style.height = `${listWrapHeight > 150 ? listWrapHeight : 150}px` */
   }
 
+  /** 解析图片表情项的 URL（应用 basePrefix/baseSuffix） */
+  private resolveImageVal(grp: EmoticonGrpData, val: string) {
+    let resolved = val
+    if (grp.basePrefix) resolved = grp.basePrefix + resolved
+    if (grp.baseSuffix) resolved = resolved + grp.baseSuffix
+    return resolved
+  }
+
   /** 处理评论 content 中的表情内容 */
   public transEmoticonImageText(text: string) {
     if (!this.emoticons || !Array.isArray(this.emoticons)) return text
@@ -311,7 +315,7 @@ export default class Emoticons extends EditorPlugin {
       Object.entries(grp.items).forEach(([index, item]) => {
         text = text
           .split(`:[${item.key}]`)
-          .join(`<img src="${item.val}" atk-emoticon="${item.key}">`) // replaceAll(...)
+          .join(`<img src="${this.resolveImageVal(grp, item.val)}" atk-emoticon="${item.key}">`) // replaceAll(...)
       })
     })
 
