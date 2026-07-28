@@ -21,6 +21,8 @@ export default defineLocaleExternal(
     restoredMsg: 'İçerik geri yüklendi',
     onlyAdminCanReply: 'Sadece yönetici yanıtlayabilir',
     uploadLoginMsg: 'Yüklemek için lütfen adınızı ve e-postanızı girin',
+    uploadingWaitMsg: 'Lütfen görsel yüklemesinin tamamlanmasını bekleyin',
+    refresh: 'Yenile',
 
     /* List */
     counter: '{count} Yorum',
@@ -40,6 +42,7 @@ export default defineLocaleExternal(
     voteUp: 'Beğen',
     voteDown: 'Beğenme',
     voteFail: 'Oylama Başarısız',
+    adminVoteUp: ' bunu harika buldu',
     readMore: 'Devamını Oku',
     actionConfirm: 'Onayla',
     collapse: 'Daralt',

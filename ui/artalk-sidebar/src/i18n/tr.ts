@@ -97,6 +97,7 @@ export const tr: MessageSchema = {
   logout: 'Çıkış Yap',
   logoutConfirm: 'Çıkış yapmak istediğinizden emin misiniz?',
   loginSelectHint: 'Lütfen giriş yapmak istediğiniz hesabı seçin:',
+  editLinkRedirectTemplate: 'Yönlendirme Şablonu',
 }
 
 export default tr
