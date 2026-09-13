@@ -13,6 +13,7 @@ export function getRedirectTemplate(): string | undefined {
  * Returns the original URL if no template is set or if the URL is same-origin.
  */
 export function applyRedirectTemplate(url: string): string {
+  url = url.replace(/[^\x00-\xFF]/g, '')
   if (!currentRedirectTemplate || !url) return url
   try {
     const linkOrigin = new URL(url).origin
