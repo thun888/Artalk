@@ -21,6 +21,8 @@ export default defineLocaleExternal(
     restoredMsg: 'Conteúdo restaurado',
     onlyAdminCanReply: 'Apenas o administrador pode responder',
     uploadLoginMsg: 'Preenche o teu nome e email para enviar',
+    uploadingWaitMsg: 'Aguarda até o envio da imagem terminar',
+    refresh: 'Atualizar',
 
     /* List */
     counter: '{count} Comentários',
@@ -40,6 +42,7 @@ export default defineLocaleExternal(
     voteUp: 'Gosto',
     voteDown: 'Não gosto',
     voteFail: 'Falha no voto',
+    adminVoteUp: ' acha isto ótimo',
     readMore: 'Ler mais',
     actionConfirm: 'Confirmar',
     collapse: 'Recolher',

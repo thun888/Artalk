@@ -96,6 +96,7 @@ export const ptPT: MessageSchema = {
   logout: 'Terminar sessão',
   logoutConfirm: 'Tens a certeza que queres terminar a sessão?',
   loginSelectHint: 'Seleciona a conta com a qual queres iniciar sessão:',
+  editLinkRedirectTemplate: 'Modelo de redirecionamento',
 }
 
 export default ptPT
