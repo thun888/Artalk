@@ -2,22 +2,28 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cap</title>
-    <script>window.CAP_CUSTOM_WASM_URL =  "{{.api_endpoint}}/assets/cap_wasm_bg.wasm";</script>
-    <script src="{{.api_endpoint}}/assets/widget.js"></script>
+    <script>
+      window.CAP_CUSTOM_WASM_URL = '{{.api_endpoint}}/assets/cap_wasm_bg.wasm'
+      window.CAP_CUSTOM_HASHWX_URL = '{{.api_endpoint}}/assets/hashwx.wasm'
+    </script>
     <style>
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-      }
       body {
+        margin: 0;
+        min-height: 100vh;
         display: flex;
-        justify-content: center;
-        height: 100vh;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+      }
+      #error:empty {
+        display: none;
+      }
+      #error {
+        margin: 8px;
+        font-size: 14px;
       }
     </style>
   </head>
@@ -30,36 +36,35 @@
       data-cap-i18n-error-label="发生错误，请重试 ＞﹏＜"
       data-cap-i18n-required-label="请验证您是人类"
     ></cap-widget>
+    <p id="error" role="alert"></p>
     <script>
-      const capWidget = document.querySelector('cap-widget');
-      capWidget.addEventListener('solve', function (event) {
-        console.log('验证成功：', event.detail.token);
-
-        fetch('./verify', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ value: event.detail.token }),
-        })
-          .then((res) => {
-            if (res.ok) {
-              window.parent.postMessage({ type: 'captcha-solved' }, '*');
-            } else {
-              res.json().then((json) => {
-                alert('验证失败：' + res.status + ' ' + json.msg || '')
-              })
-            }
+      const widget = document.querySelector('cap-widget')
+      const error = document.getElementById('error')
+      widget.addEventListener('solve', async (event) => {
+        error.textContent = ''
+        try {
+          const response = await fetch(location.pathname.replace(/\/?$/, '/verify'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ value: event.detail.token }),
           })
-          .catch((err) => {
-            console.error(err)
-            alert('后端 API 请求失败：' + err.message || '')
-          })
-      }, { once: true });
-        // capWidget.addEventListener('error', function (event) {
-        // alert('验证失败');
-        // });
+          if (!response.ok) throw new Error('Verification failed. Please try again.')
+          window.parent.postMessage({ type: 'captcha-solved' }, '*')
+        } catch {
+          error.textContent = '验证失败，请重试'
+          widget.reset()
+        }
+      })
+      widget.addEventListener('error', () => {
+        error.textContent = '验证码加载失败，请重试'
+      })
     </script>
+    <script
+      src="{{.api_endpoint}}/assets/widget.js"
+      onerror="
+        document.getElementById('error').textContent =
+          '验证码加载失败，请重试'
+      "
+    ></script>
   </body>
 </html>

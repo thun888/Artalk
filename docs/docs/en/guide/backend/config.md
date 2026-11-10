@@ -148,6 +148,25 @@ Note that environment variables will override the settings in the configuration 
 
 Technical details: `trusted_domains` configuration controls cross-origin requests by setting the HTTP response header `Access-Control-Allow-Origin` (refer to: [W3C Cross-Origin Resource Sharing](https://fetch.spec.whatwg.org/#http-cors-protocol) / [OWASP Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)).
 
+Use `https://*.example.com` in either list to allow browser requests from one subdomain level, such as `https://blog.example.com`. It does not match `example.com` or `a.b.example.com`. The scheme and port must match. Only use a wildcard if you trust all matching subdomains. For relative page keys, keep a concrete URL first in the site URL list.
+
+Page-title fetching uses the same trusted list: `trusted_domains` and the site URLs configured in the dashboard. The initial request and every HTTP or HTML redirect must match a listed scheme, host, and port. Paths in configuration entries are ignored. Wildcards do not authorize title fetching. Add each destination URL explicitly. If your pages redirect to another origin, add that site's URL as well.
+
+Explicitly listed private-network sites and `localhost` remain supported, as do the server's `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` environment settings. Only add sites you trust Artalk to access: this list also authorizes outbound requests to those sites.
+
+When enabled, automatic title discovery triggered by comments starts at most one task per second per Artalk instance, with at most four tasks running concurrently. An in-progress URL is not fetched again. When busy, automatic discovery is skipped without affecting comment submission; a later comment or a dashboard refresh can retry it. Manual and bulk administrator refreshes bypass the automatic-task rate limit but still check the trusted list. Each task follows at most 10 redirects and has a 30-second total deadline. Only the first 2 MiB of the document head are read, so a large body does not invalidate an already-read title.
+
+## Auto-Fetch Page Titles `page_title_auto_fetch`
+
+```yaml
+# Disabled by default for security; manual fetching remains available.
+page_title_auto_fetch: false
+```
+
+Disabled by default, including when omitted from an existing configuration. Setting it to `true` allows comments to trigger automatic fetching for pages without titles. Titles supplied by clients are still saved, and page creation and page-view counting are unaffected. Administrators can still manually refresh individual or all page titles. Manual fetching continues to enforce trusted origins, timeouts, size limits, and redirect limits.
+
+Set `ATK_PAGE_TITLE_AUTO_FETCH=true` to enable it through an environment variable.
+
 ## Default Site `site_default`
 
 If you think you won't use the multi-site feature of Artalk, you can directly set this item to your site name, for example:
@@ -251,7 +270,9 @@ port: 23366
 
 Configuring the `host` listening address to `0.0.0.0` will expose the Artalk service to the entire network.
 
-If you want Artalk to be accessible only locally, configure `host` to `127.0.0.1`.
+Use `host: '::'` to listen on IPv6. Both bare IPv6 addresses and addresses in brackets, such as `[::1]`, are accepted. On systems that support both protocols, `0.0.0.0` and `::` accept IPv4 and IPv6 connections.
+
+For local access only, use `127.0.0.1` for IPv4 or `::1` for IPv6. These settings apply to both HTTP and HTTPS.
 
 When starting Artalk via the command line, you can specify the address and port using the `--host` and `--port` parameters, for example:
 

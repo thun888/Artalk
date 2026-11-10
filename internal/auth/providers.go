@@ -28,11 +28,19 @@ import (
 	"github.com/samber/lo"
 )
 
+// CallbackOrigin is shared by provider registration and the popup handshake.
+func CallbackOrigin(conf *config.Config) string {
+	u, err := url.Parse(conf.Auth.Callback)
+	if err != nil || (u.Scheme != "https" && u.Scheme != "http") || u.Host == "" {
+		return ""
+	}
+	return u.Scheme + "://" + u.Host
+}
+
 func GetProviders(conf *config.Config) []goth.Provider {
 	providers := []goth.Provider{}
 
-	u, _ := url.Parse(conf.Auth.Callback)
-	origin := u.Scheme + "://" + u.Host
+	origin := CallbackOrigin(conf)
 
 	callbackURL := func(provider string) string {
 		log.Debug("[SocialLogin] Callback URL: ", fmt.Sprintf("%s/api/v2/auth/%s/callback", origin, provider))
@@ -51,8 +59,13 @@ func GetProviders(conf *config.Config) []goth.Provider {
 	}
 	// @see https://docs.gitea.io/en-us/oauth2-provider/
 	if giteaConf := conf.Auth.Gitea; giteaConf.Enabled {
-		providers = append(providers, gitea.New(giteaConf.ClientID, giteaConf.ClientSecret, callbackURL("gitea"),
-			"read:user"))
+		siteURL, err := giteaSiteURL(giteaConf.SiteURL)
+		if err != nil {
+			log.Error("[SocialLogin] ", err)
+		} else {
+			providers = append(providers, gitea.NewCustomisedURL(giteaConf.ClientID, giteaConf.ClientSecret, callbackURL("gitea"),
+				siteURL+"/login/oauth/authorize", siteURL+"/login/oauth/access_token", siteURL+"/api/v1/user", "read:user"))
+		}
 	}
 	// @see https://developers.google.com/identity/protocols/oauth2
 	if googleConf := conf.Auth.Google; googleConf.Enabled {
@@ -116,6 +129,15 @@ func GetProviders(conf *config.Config) []goth.Provider {
 	if auth0Conf := conf.Auth.Auth0; auth0Conf.Enabled {
 		providers = append(providers, auth0.New(auth0Conf.ClientID, auth0Conf.ClientSecret, callbackURL("auth0"),
 			auth0Conf.Domain, "openid", "profile", "email"))
+	}
+	// @see https://developer.okta.com/docs/api/
+	if oktaConf := conf.Auth.Okta; oktaConf.Enabled {
+		provider, err := newOktaProvider(oktaConf.Issuer, oktaConf.ClientID, oktaConf.ClientSecret, callbackURL("okta"))
+		if err != nil {
+			log.Error("[SocialLogin] ", err)
+		} else {
+			providers = append(providers, provider)
+		}
 	}
 
 	return providers

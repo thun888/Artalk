@@ -37,6 +37,9 @@ cache:
     password: ""
     db: 0
 trusted_domains: []
+
+# Auto-fetch page titles (Disabled by default for security; manual fetching remains available)
+page_title_auto_fetch: false
 ssl:
   enabled: false
   cert_path: ""
@@ -180,6 +183,8 @@ auth:
     enabled: false
     client_id: ""
     client_secret: ""
+    # Server URL (leave empty for https://gitea.com; supports ports and subpaths)
+    site_url: ""
   google:
     enabled: false
     client_id: ""
@@ -236,6 +241,11 @@ auth:
     client_id: ""
     client_secret: ""
     domain: ""
+  okta:
+    enabled: false
+    client_id: ""
+    client_secret: ""
+    issuer: ""
   sso:
     enabled: false
     issuer: ""

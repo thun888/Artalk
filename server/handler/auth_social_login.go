@@ -21,8 +21,9 @@ func SocialLoginGuard(app *core.App, handler fiber.Handler) fiber.Handler {
 }
 
 type ResponseConfAuthProviders struct {
-	Providers []auth.AuthProviderInfo `json:"providers" validator:"required"`
-	Anonymous bool                    `json:"anonymous" validator:"required"`
+	CallbackOrigin string                  `json:"callback_origin,omitempty"`
+	Providers      []auth.AuthProviderInfo `json:"providers" validator:"required"`
+	Anonymous      bool                    `json:"anonymous" validator:"required"`
 }
 
 // @Id            GetSocialLoginProviders
@@ -52,8 +53,9 @@ func AuthSocialLogin(app *core.App, router fiber.Router) {
 	// Endpoints
 	router.Get("/conf/auth/providers", SocialLoginGuard(app, func(c *fiber.Ctx) error {
 		return common.RespData(c, ResponseConfAuthProviders{
-			Providers: auth.GetProviderInfo(app.Conf(), providers),
-			Anonymous: app.Conf().Auth.Anonymous,
+			CallbackOrigin: auth.CallbackOrigin(app.Conf()),
+			Providers:      auth.GetProviderInfo(app.Conf(), providers),
+			Anonymous:      app.Conf().Auth.Anonymous,
 		})
 	}))
 
@@ -76,7 +78,10 @@ func AuthSocialLogin(app *core.App, router fiber.Router) {
 		}
 
 		// Convert to social user
-		socialUser := auth.GetSocialUser(gothUser)
+		socialUser, err := auth.GetSocialUser(gothUser, &app.Conf().Auth)
+		if err != nil {
+			return common.RespError(c, 500, err.Error())
+		}
 		log.Debug("[SocialLogin] ", socialUser)
 
 		// Find auth identity

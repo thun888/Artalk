@@ -10,7 +10,7 @@ app_key: ""
 # 调试模式
 debug: false
 
-# 语言 ["en", "zh-CN", "zh-TW", "ja", "fr", "ko", "ru"]
+# 语言 ["en", "zh-CN", "zh-TW", "ja", "fr", "ko", "ru", "tr", "pt-PT"]
 locale: zh-CN
 
 # 时间区域
@@ -91,6 +91,9 @@ cache:
 # -- 例如：["https://artalk.example.com:23366"] --
 trusted_domains: []
 
+# 自动抓取页面标题 (关闭可禁用标题自动抓取功能（可以手动抓取），提高安全性)
+page_title_auto_fetch: false
+
 # SSL
 ssl:
   # 启用 SSL
@@ -145,28 +148,7 @@ moderator:
     file_sep: "\n"
     # 替换字符
     replace_to: x
-  # AI 内容审核
-  # (使用 AI 检测垃圾评论，支持 OpenAI 和 Anthropic 端点)
-  ai:
-    enabled: false
-    # 端点类型 ["openai", "anthropic"]
-    type: openai
-    # 端点URL(完整链接，示例: "https://api.openai.com/v1/chat/completions")
-    endpoint: "https://api.openai.com/v1/chat/completions"
-    # AI API Key
-    api_key: ""
-    # AI 模型名称
-    model: "abcd"
-    # 系统提示词(模型的角色设定，建议包含明确的垃圾评论定义和判断标准，并以 JSON 格式返回结果)
-    system_prompt: "You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."
-    # 用户提示词(可用的占位符：{{content}}、{{username}}、{{email}}、{{ip}}、{{ua}}、{{blog_url}})
-    user_prompt: "{{content}}"
-    # 思考模式
-    thinking: false
-    # JSON 输出(自动返回结构化 JSON，仅对 OpenAI 兼容的端点生效)
-    json_output: false
-    # 最大 tokens 数量
-    max_tokens: 1024
+
 # 验证码
 captcha:
   # 启用验证码
@@ -202,11 +184,12 @@ captcha:
     key_id: ""
     secret_key: ""
     api_endpoint: ""
+
 # IP 属地
 ip_region:
   # 启用 IP 属地展示
   enabled: false
-  # 数据文件路径 (.xdb 格式)
+  # 数据文件路径 (.xdb 或标准版 .ipdb 格式)
   db_path: ./data/ip2region.xdb
   # 显示精度 ["province", "city", "country"]
   precision: province
@@ -282,7 +265,6 @@ admin_notify:
   telegram:
     enabled: false
     api_token: ""
-    api_endpoint: "" # 自定义 Telegram Bot API 端点 (例如: https://tg.example.com)
     receivers:
       - 7777777
   # Bark
@@ -350,6 +332,8 @@ auth:
     enabled: false
     client_id: ""
     client_secret: ""
+    # 服务地址 (留空使用 https://gitea.com，支持端口和子路径)
+    site_url: ""
   # Google
   google:
     enabled: false
@@ -420,6 +404,13 @@ auth:
     client_id: ""
     client_secret: ""
     domain: ""
+  # Okta
+  okta:
+    enabled: false
+    client_id: ""
+    client_secret: ""
+    # 授权服务地址（HTTPS，例如 https://example.okta.com/oauth2/default）
+    issuer: ""
   # SSO (用外部 OIDC 身份提供商的访问令牌换取 Artalk 登录会话，通过调用 IdP 的 /userinfo 端点校验)
   # -- 当嵌入页面已运行 OIDC 且希望 Artalk 复用该登录态、不显示自身弹窗登录界面时使用。 --
   sso:

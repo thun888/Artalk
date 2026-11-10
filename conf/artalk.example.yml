@@ -10,7 +10,7 @@ app_key: ""
 # Debug mode
 debug: false
 
-# Language (follow Unicode BCP 47) ["en", "zh-CN", "zh-TW", "ja", "fr", "ko", "ru", "tr"]
+# Language (follow Unicode BCP 47) ["en", "zh-CN", "zh-TW", "ja", "fr", "ko", "ru", "tr", "pt-PT"]
 # -- see https://www.techonthenet.com/js/language_tags.php --
 locale: en
 
@@ -95,6 +95,9 @@ cache:
 # -- e.g. ["https://artalk.example.com:23366"] add url of your site her --
 trusted_domains: []
 
+# Auto-fetch page titles (Disabled by default for security; manual fetching remains available)
+page_title_auto_fetch: false
+
 # SSL
 ssl:
   # Enable SSL
@@ -143,28 +146,6 @@ moderator:
       - ./data/keywords_1.txt
     file_sep: "\n"
     replace_to: x
-  # AI Content Moderation
-  # (Uses AI to detect spam comments, supports OpenAI and Anthropic endpoints)
-  ai:
-    enabled: false
-    # Endpoint type ["openai", "anthropic"]
-    type: openai
-    # Endpoint URL (full URL, like "https://api.openai.com/v1/chat/completions")
-    endpoint: "https://api.openai.com/v1/chat/completions"
-    # AI API Key
-    api_key: ""
-    # AI model name
-    model: "abcd"
-    # System prompt (Defines the model's role. It's recommended to include clear spam definitions, judging criteria, and return the result in JSON format)
-    system_prompt: "You are a spam content detector. Determine if the given comment is spam or an advertisement. Reply with a JSON object: {\"result\": true, \"reason\": \"brief explanation\"} for spam, or {\"result\": false, \"reason\": \"\"} for not spam."
-    # User prompt (Available placeholders: {{content}}, {{username}}, {{email}}, {{ip}}, {{ua}}, {{blog_url}})
-    user_prompt: "{{content}}"
-    # Thinking mode
-    thinking: false
-    # JSON Output (automatically return structured JSON, only for OpenAI-compatible endpoints)
-    json_output: false
-    # Max tokens
-    max_tokens: 1024
 
 # Captcha
 captcha:
@@ -202,6 +183,7 @@ captcha:
     key_id: ""
     secret_key: ""
     api_endpoint: ""
+
 # Upload
 img_upload:
   # Enable image upload
@@ -275,7 +257,6 @@ admin_notify:
   telegram:
     enabled: false
     api_token: ""
-    api_endpoint: "" # 自定义 Telegram Bot API 端点 (格式: https://tg.example.com)
     receivers:
       - 7777777
   # Bark
@@ -343,6 +324,8 @@ auth:
     enabled: false
     client_id: ""
     client_secret: ""
+    # Server URL (leave empty for https://gitea.com; supports ports and subpaths)
+    site_url: ""
   # Google
   google:
     enabled: false
@@ -413,6 +396,13 @@ auth:
     client_id: ""
     client_secret: ""
     domain: ""
+  # Okta
+  okta:
+    enabled: false
+    client_id: ""
+    client_secret: ""
+    # Issuer URL (HTTPS, e.g. https://example.okta.com/oauth2/default)
+    issuer: ""
   # SSO (Exchange external OIDC access tokens for Artalk login sessions, verified via the IdP's /userinfo endpoint)
   # -- Use this when the embedding app already runs OIDC and you want Artalk to inherit that session without its own popup login UI. --
   sso:

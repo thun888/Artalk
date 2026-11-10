@@ -32,6 +32,8 @@ type Config struct {
 	Auth           AuthConf               `koanf:"auth" json:"auth"`                       // Social Login
 	Frontend       map[string]interface{} `koanf:"frontend" json:"frontend"`
 
+	PageTitleAutoFetch bool `koanf:"page_title_auto_fetch" json:"page_title_auto_fetch"` // 自动抓取页面标题（默认关闭）
+
 	// deprecated options
 	// (only for unmarshal, please not reference)
 	// ---------------------------
@@ -411,6 +413,7 @@ type AuthConf struct {
 		Enabled      bool   `koanf:"enabled" json:"enabled"`
 		ClientID     string `koanf:"client_id" json:"client_id"`
 		ClientSecret string `koanf:"client_secret" json:"client_secret"`
+		SiteURL      string `koanf:"site_url" json:"site_url"`
 	} `koanf:"gitea" json:"gitea"`
 	Google struct {
 		Enabled      bool   `koanf:"enabled" json:"enabled"`
@@ -482,6 +485,12 @@ type AuthConf struct {
 		ClientSecret string `koanf:"client_secret" json:"client_secret"`
 		Domain       string `koanf:"domain" json:"domain"`
 	} `koanf:"auth0" json:"auth0"`
+	Okta struct {
+		Enabled      bool   `koanf:"enabled" json:"enabled"`
+		ClientID     string `koanf:"client_id" json:"client_id"`
+		ClientSecret string `koanf:"client_secret" json:"client_secret"`
+		Issuer       string `koanf:"issuer" json:"issuer"`
+	} `koanf:"okta" json:"okta"`
 
 	// Token exchange — accept an access token from an external OIDC IdP
 	// (verified via that IdP's /userinfo) and issue an Artalk JWT for the
@@ -492,7 +501,7 @@ type AuthConf struct {
 }
 
 type AuthSSOConf struct {
-	Enabled bool   `koanf:"enabled" json:"enabled"`
+	Enabled bool `koanf:"enabled" json:"enabled"`
 	// Issuer is the OIDC issuer URL — e.g. "tenant.auth0.com" or
 	// "https://tenant.auth0.com". /userinfo is called against this host.
 	Issuer string `koanf:"issuer" json:"issuer"`
