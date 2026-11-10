@@ -57,6 +57,7 @@ function Detect(userAgent?: string) {
     Douban: u.includes('com.douban.frodo'),
     Suning: u.includes('SNEBUY-APP'),
     iQiYi: u.includes('IqiyiApp'),
+    '个站商店APP': u.includes('app.android:storeweb.cn'),
   }
 
   // 系统或平台
@@ -189,6 +190,7 @@ function Detect(userAgent?: string) {
     Douban: () => u.replace(/^.*com.douban.frodo\/([\d.]+).*$/, '$1'),
     Suning: () => u.replace(/^.*SNEBUY-APP([\d.]+).*$/, '$1'),
     iQiYi: () => u.replace(/^.*IqiyiVersion\/([\d.]+).*$/, '$1'),
+    '个站商店APP': () => u.replace(/^.*app\.android:storeweb\.cn:v([\d.]+).*$/, '$1'),
   }
 
   dest.version = ''
@@ -221,7 +223,7 @@ function Detect(userAgent?: string) {
   } else if (dest.browser === 'Yandex') {
     dest.engine = 'Blink'
   } else if (dest.browser === undefined) {
-    dest.browser = 'Unknow App'
+    dest.browser = 'Unknown App'
   }
 
   return dest
